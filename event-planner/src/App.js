@@ -1,28 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/LoginForm';
-import Registration from './components/RegistrationForm';
-import Dashboard from './components/DashboardForm';
-import EventManagement from './components/EventManagementForm';
-import TaskManagement from './components/TaskManagementForm';
-import ResourceManagement from './components/ResourceManagement';
-import Collaboration from './components/CollaborationForm';
-import BudgetManagement from './components/BudgetManagementForm';
+import LoginForm from './components/LoginForm';
+import RegistrationForm from './components/RegistrationForm';
+import DashboardForm from './components/DashboardForm';
+import EventManagementForm from './components/EventManagementForm';
+import TaskManagementForm from './components/TaskManagementForm';
+import ResourceManagementForm from './components/ResourceManagement';
+import CollaborationForm from './components/CollaborationForm';
+import BudgetManagementForm from './components/BudgetManagementForm';
 import './App.css';
+import './components/LoginForm.css';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div>
+        <hr />
         <Routes>
-          <Route path="/" exact component={Login} />
-          <Route path="/register" component={Registration} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/events" component={EventManagement} />
-          <Route path="/tasks" component={TaskManagement} />
-          <Route path="/resources" component={ResourceManagement} />
-          <Route path="/collaboration" component={Collaboration} />
-          <Route path="/budget" component={BudgetManagement} />
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/register" element={<RegistrationForm />} />
+          <Route path="/dashboard" element={<DashboardForm />} />
+          <Route path="/events" element={<EventManagementForm />} />
+          <Route path="/tasks" element={<TaskManagementForm />} />
+          <Route path="/resources" element={<ResourceManagementForm />} />
+          <Route path="/collaboration" element={<CollaborationForm />} />
+          <Route path="/budget" element={<BudgetManagementForm />} />
         </Routes>
       </div>
     </Router>
