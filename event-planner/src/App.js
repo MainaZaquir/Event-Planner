@@ -10,11 +10,13 @@ import CollaborationForm from './components/CollaborationForm';
 import BudgetManagementForm from './components/BudgetManagementForm';
 import './App.css';
 import './components/LoginForm.css';
+import Navbar from './components/NavBar';
 
 function App() {
   return (
     <Router>
       <div>
+        <Navbar />
         <hr />
         <Routes>
           <Route path="/" element={<LoginForm />} />
