@@ -16,6 +16,7 @@ const Dashboard = () => {
     const [expenses, setExpenses] = useState([]);
     const [budget] = useState(0);
     const [expenseForm, setExpenseForm] = useState({
+        
         description: '',
         amount: ''
     });
