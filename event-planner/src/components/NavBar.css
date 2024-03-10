@@ -1,23 +1,18 @@
 .navbar {
     position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: space-between;
-    width: 99%;
+    width: 100%;
     align-items: center;
     flex-wrap: wrap;
     padding: 15px 15px;  
     background-color: #282c34;
     font-size: 1.2em; 
-}
-#navbar {
-    
-    top: 0;
     z-index: 999;
-    
-    background-color: #333;
-    color: #fff;
-    
-  }
+}
+
 .navbar-logo {
     color: #fff; 
     text-decoration: none; 
@@ -46,6 +41,7 @@
     transition: width 0.3s ease-in-out;
 }
 
-.navbar-link:hover:after {
+.navbar-link:hover:after,
+.navbar-link:hover {
     width: 100%;
 }

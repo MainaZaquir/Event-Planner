@@ -24,6 +24,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
         try {
             setTimeout(async () => {
                 const response = await axios.post('/api/login', formData); 
@@ -42,7 +43,7 @@ function Login() {
                     <form onSubmit={handleSubmit}>
                         <h2>Login Form</h2>
                         <div className="inputbox">
-                            <ion-icon name="mail-outline"></ion-icon>
+                            <ion-icon name={showPassword ? "eye-outline" : "eye-off-outline"}></ion-icon>
                             <input type="email" name="email" placeholder="Enter Email" value={formData.email} onChange={handleChange} required />
                         </div>
                         <div className="inputbox">

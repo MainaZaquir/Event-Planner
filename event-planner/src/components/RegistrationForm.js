@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './RegistrationForm.css'; 
 
-const SignUpForm = () => {
+const RegistrationForm = () => {
   const [companyName, setCompanyName] = useState('');
   const [companyEmail, setCompanyEmail] = useState('');
   const [companyNumber, setCompanyNumber] = useState('');
@@ -25,21 +26,20 @@ const SignUpForm = () => {
       });
 
       if (response.status === 200) {
-        alert('Registration successful');
-        // Redirect or reset form fields here
+        alert('Registration was successful');
       } else {
-        alert('Registration failed');
+        alert('Registration has failed');
       }
     } catch (error) {
       console.error(error);
-      alert('An error occurred during registration');
+      alert('An error has occurred during registration');
     }
   };
 
   return (
-    <div>
+    <div className="sign-up-container"> 
       <h1>Have an event coming up? Sign up with us for your ticket management.</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="sign-up-form" onSubmit={handleSubmit}> 
         <label htmlFor="company_name">Company Name:</label><br />
         <input
           type="text"
@@ -48,6 +48,7 @@ const SignUpForm = () => {
           value={companyName}
           onChange={(e) => setCompanyName(e.target.value)}
           required
+          className="form-input" 
         /><br />
         <label htmlFor="company_email">Company Email:</label><br />
         <input
@@ -57,6 +58,7 @@ const SignUpForm = () => {
           value={companyEmail}
           onChange={(e) => setCompanyEmail(e.target.value)}
           required
+          className="form-input"
         /><br />
         <label htmlFor="company_number">Company Number:</label><br />
         <input
@@ -68,6 +70,7 @@ const SignUpForm = () => {
           value={companyNumber}
           onChange={(e) => setCompanyNumber(e.target.value)}
           required
+          className="form-input" 
         /><br />
         <label htmlFor="new_password">Enter New Password:</label><br />
         <input
@@ -78,6 +81,7 @@ const SignUpForm = () => {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           required
+          className="form-input"
         /><br />
         <label htmlFor="confirm_password">Confirm Password:</label><br />
         <input
@@ -88,12 +92,13 @@ const SignUpForm = () => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
+          className="form-input" 
         /><br />
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="form-button">Sign Up</button> 
       </form>
       <p>Already have an account? <a href="/login">Log in.</a></p>
     </div>
   );
 };
 
-export default SignUpForm;
+export default RegistrationForm;
