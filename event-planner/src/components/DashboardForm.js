@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import ResourceManagementForm from './ResourceManagementForm';
+import ResourceManagementForm from './ResourceManagement'; 
 import TaskManagementForm from './TaskManagementForm'; 
 
 const Dashboard = () => {
@@ -11,20 +11,23 @@ const Dashboard = () => {
   const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/events')
-      .then(response => setEvents(response.data))
-      .catch(error => console.error(error));
+    const fetchData = async () => {
+      try {
+        const eventsResponse = await axios.get('/api/events');
+        setEvents(eventsResponse.data);
 
-    axios.get('/api/tasks')
-      .then(response => {
-        setTasks(response.data);
-        setFilteredTasks(response.data);
-      })
-      .catch(error => console.error(error));
+        const tasksResponse = await axios.get('/api/tasks');
+        setTasks(tasksResponse.data);
+        setFilteredTasks(tasksResponse.data);
 
-    axios.get('/api/messages')
-      .then(response => setMessages(response.data))
-      .catch(error => console.error(error));
+        const messagesResponse = await axios.get('/api/messages');
+        setMessages(messagesResponse.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleTaskFilter = (category) => {
@@ -39,14 +42,15 @@ const Dashboard = () => {
     setFilteredTasks(filtered);
   };
 
-  const handleDeleteTask = (taskId) => {
-    axios.delete(`/api/tasks/${taskId}`)
-      .then(response => {
-        const updatedTasks = tasks.filter(task => task.id !== taskId);
-        setTasks(updatedTasks);
-        setFilteredTasks(updatedTasks);
-      })
-      .catch(error => console.error(error));
+  const handleDeleteTask = async (taskId) => {
+    try {
+      await axios.delete(`/api/tasks/${taskId}`);
+      const updatedTasks = tasks.filter(task => task.id !== taskId);
+      setTasks(updatedTasks);
+      setFilteredTasks(updatedTasks);
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
 
   const reorder = (list, startIndex, endIndex) => {
