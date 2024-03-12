@@ -5,7 +5,7 @@ import RegistrationForm from './components/RegistrationForm';
 import DashboardForm from './components/DashboardForm';
 import EventManagementForm from './components/EventManagementForm';
 import TaskManagementForm from './components/TaskManagementForm';
-import ResourceManagement from './components/ResourceManagement';
+import ResourceManagement from './components/ResourceManagementForm';
 import CollaborationForm from './components/CollaborationForm';
 import BudgetManagementForm from './components/BudgetManagementForm';
 import './App.css';
