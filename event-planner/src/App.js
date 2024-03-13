@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import DashboardForm from './components/DashboardForm';
@@ -16,7 +16,7 @@ import Navbar from './components/NavBar';
 
 function App() {
   return (
-   
+    
       <div>
         <Navbar />
         <hr />
@@ -31,7 +31,7 @@ function App() {
           <Route path="/budget" element={<BudgetManagementForm />} />
         </Routes>
       </div>
-   
+    
   );
 }
 
