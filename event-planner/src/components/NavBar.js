@@ -1,78 +1,45 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleSidebar } from '../features/sidebar/sidebarSlice'; // Import toggleSidebar action
-import { selectUser } from '../features/user/userSlice';
 
-import { Navbar } from 'react-bootstrap'; // Only importing Navbar from react-bootstrap since Nav is not used
+import  { useState } from 'react'
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+// import { NavLink } from "react-router-dom"
 
-const routes = [
-  { path: '/', label: 'Home' },
-  { path: '/events', label: 'Events' },
-  { path: '/services', label: 'Services' },
-  { path: '/about', label: 'About' },
-  { path: '/contact', label: 'Contact' },
-];
-
-function UserMenu({ user }) {
-  // Render user menu based on user authentication
-  return user ? (
-    <>
-      <span className="nav-item nav-link">{user.name}</span>
-      <button
-        className="nav-item nav-link btn btn-outline-danger"
-        onClick={() => console.log('Logout')}
-      >
-        Logout
-      </button>
-    </>
-  ) : (
-    <>
-      <Link to="/login" className="nav-item nav-link">
-        Login
-      </Link>
-      <Link to="/register" className="nav-item nav-link">
-        Register
-      </Link>
-    </>
-  );
+function Home() {
+    const [nav, setNav] = useState(false)
+    const handleNav = () =>{
+        setNav(!nav)
+    }
+    
+    return (
+        <div className='bg-[#e7e7e5]  fixed top-0 w-full z-10 my-2'>
+          <div className='flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4'>
+            <img className='h-[75px] w-[75px]' src="https://images-workbench.99static.com/wxRe-Rdbsm4ntxzxV9lL715O5nM=/99designs-contests-attachments/122/122876/attachment_122876400" alt="/" />
+            <ul className='hidden md:flex cursor-pointer'>
+              <a href='/home'><li className='p-4 text-blue-500'>Dashboard</li></a> 
+              <a href='/report'><li className='p-4 text-blue-500'>Event</li></a>
+              <a href='/contact' className='p-4 text-blue-500'>About</a>
+              <a href='/contact'><li className='p-4 text-blue-500'>Login</li></a> 
+              
+              <a href='/signup'><li className='p-4 px-12 font-bold text-blue-500'>Sign Up</li></a>
+              <a href='/users'><li className='p-4 text-blue-500'>My Profile</li></a>
+            </ul>
+            <div onClick={handleNav} className='cursor-pointer block md:hidden'>
+              {nav ?  <AiOutlineClose size={20}/> : <AiOutlineMenu size={20}  />}
+            </div>
+            <div className={nav ? 'fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#fff] ease-in-out duration-500' : 'fixed left-[-100%]'}>
+            <img className='h-[75px] w-[75px]' src="https://images-workbench.99static.com/wxRe-Rdbsm4ntxzxV9lL715O5nM=/99designs-contests-attachments/122/122876/attachment_122876400" alt="/" />
+              <ul className='pt-12 uppercase p-4 '>
+              <a href='/home'><li className='p-4 text-blue-500'>Dashboard</li></a> 
+              <a href='/report'><li className='p-4 text-blue-500'>Event</li></a>
+              <a href='/contact' className='p-4 text-blue-500'>About</a>
+              <a href='/contact'><li className='p-4 text-blue-500'>Login</li></a> 
+              
+              <a href='/signup'><li className='p-4 px-12 font-bold text-blue-500'>Sign Up</li></a>
+              <a href='/users'><li className='p-4 text-blue-500'>My Profile</li></a>
+              
+              </ul>
+            </div>
+          </div>
+        </div>)
 }
 
-function NavBar() {
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-
-  const handleToggleSidebar = () => {
-    dispatch(toggleSidebar()); // Dispatch the toggleSidebar action
-  };
-
-  return (
-    <Navbar expand="lg" bg="light" variant="light">
-      <div className="container">
-        <Navbar.Toggle aria-controls="navbarNav" onClick={handleToggleSidebar}>
-          <FaBars />
-        </Navbar.Toggle>
-        <Link to="/" className="navbar-brand">
-          Event Time
-        </Link>
-        <Navbar.Collapse id="navbarNav">
-          <ul className="navbar-nav">
-            {routes.map((route) => (
-              <li className="nav-item" key={route.path}>
-                <Link to={route.path} className="nav-link">
-                  {route.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Navbar.Collapse>
-        <div className="navbar-nav ml-auto">
-          <UserMenu user={user} />
-        </div>
-      </div>
-    </Navbar>
-  );
-}
-
-export default NavBar;
+export default Home
