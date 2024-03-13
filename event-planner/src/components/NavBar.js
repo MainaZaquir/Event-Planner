@@ -1,11 +1,11 @@
-// NavBar.js
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../features/sidebar/sidebarSlice';
-import { selectUser } from '../features/user/userSlice'; // Import selectUser
+import { selectUser } from '../features/user/userSlice';
+
+import {Navbar, Nav} from 'react-bootstrap';
 
 const routes = [
   { path: '/', label: 'Home' },
@@ -16,6 +16,15 @@ const routes = [
 ];
 
 function UserMenu({ user }) {
+
+  return (
+    <Navbar>
+       <Navbar.brand>
+       <img src='' />
+       </Navbar.brand>
+
+    </Navbar>
+  )
   return user ? (
     <>
       <span className="nav-item nav-link">{user.name}</span>
@@ -40,7 +49,7 @@ function UserMenu({ user }) {
 
 function NavBar() {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser); // Use selectUser selector
+  const user = useSelector(selectUser);
 
   const handleToggleSidebar = () => {
     dispatch(toggleSidebar());
