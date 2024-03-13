@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6ba0557 (made changes)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
