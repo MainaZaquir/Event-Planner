@@ -8,6 +8,7 @@ import TaskManagementForm from './components/TaskManagementForm';
 import ResourceManagement from './components/ResourceManagement';
 import CollaborationForm from './components/CollaborationForm';
 import BudgetManagementForm from './components/BudgetManagementForm';
+import LandingPage from './components/LandingPage';
 import './App.css';
 import './components/LoginForm.css';
 import Navbar from './components/NavBar';
@@ -20,7 +21,8 @@ function App() {
         <Navbar />
         <hr />
         <Routes>
-          <Route path="/" element={<LoginForm />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/dashboard" element={<DashboardForm />} />
           <Route path="/events" element={<EventManagementForm />} />

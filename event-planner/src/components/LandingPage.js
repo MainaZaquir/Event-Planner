@@ -1,11 +1,14 @@
-// landing-page.js
 import './LandingPage.css'
 import React from 'react';
-import { createRoot } from 'react-dom'; // Import createRoot from react-dom
+import { createRoot } from 'react-dom'; 
+import Navbar from './NavBar';
 
 function LandingPage() {
     return (
+        <>
+        <Navbar />
         <div className="landing-page">
+            
             <header>
                 <h1>Welcome to Event Planning Hub</h1>
                 <p>Efficiently plan and organize your events!</p>
@@ -36,13 +39,12 @@ Timely setup, smooth transitions, and adherence to the agenda contribute to a su
                 <p>© 2024 Event Planning Hub</p>
             </footer>
         </div>
+        </>
     );
 }
 
 const root = document.getElementById('root');
 const app = createRoot(root);
 app.render(<LandingPage />);
-
-// Add any additional logic or functionality as needed
 
 export default LandingPage;
