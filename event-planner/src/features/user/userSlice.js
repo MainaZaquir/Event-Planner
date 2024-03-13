@@ -1,4 +1,3 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -19,7 +18,6 @@ const userSlice = createSlice({
 });
 
 export const { setUser, clearUser } = userSlice.actions;
-export const selectUser = (state) => state.user.user; // Define selectUser selector
+export const selectUser = (state) => state.user.user; 
 
 export default userSlice.reducer;
-

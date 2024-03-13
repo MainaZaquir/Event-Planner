@@ -1,47 +1,37 @@
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 15px 15px;  
-    background-color: #282c34;
-    font-size: 1.2em; 
-    z-index: 999;
-}
-
-.navbar-logo {
-    color: #fff; 
-    text-decoration: none; 
-    font-weight: bold; 
-}
-
-.navbar-links {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-link {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 15px; 
-    position: relative;
-    padding: 10px 10px;
-}
-
-.navbar-link:after {
+@media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  
+    .nav-link {
+      margin-left: 0;
+      margin-bottom: 10px; 
+    }
+  }
+  
+  .navbar-brand:hover {
+    opacity: 0.8;
+  }
+  
+  .nav-link:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.5); 
+  }
+  
+  .nav-link::before {
     content: '';
     display: block;
     width: 0;
     height: 2px;
-    background-color: #61dafb;
-    transition: width 0.3s ease-in-out;
-}
-
-.navbar-link:hover:after,
-.navbar-link:hover {
+    background-color: transparent;
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  }
+  
+  .nav-link:hover::before,
+  .nav-link:focus::before {
     width: 100%;
-}
+    background-color: #61dafb;
+  }
+  

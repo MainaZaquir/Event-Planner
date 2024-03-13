@@ -1,13 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: null, 
+  isOpen: false, 
 };
 
-export const userSlice = createSlice({
-  name: 'user', 
+export const sidebarSlice = createSlice({
+  name: 'sidebar', 
   initialState, 
   reducers: {
+    toggleSidebar: (state) => {
+      state.isOpen = !state.isOpen;
+    },
     setUser: (state, action) => {
       state.user = action.payload;
     },
@@ -18,6 +21,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser, selectUser, toggleSidebar } = userSlice.actions;
+export const { setUser, clearUser, selectUser, toggleSidebar } = sidebarSlice.actions;
 
-export default userSlice.reducer;
+export default sidebarSlice.reducer;
