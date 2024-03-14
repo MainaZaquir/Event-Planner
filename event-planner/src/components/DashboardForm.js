@@ -4,12 +4,14 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ResourceManagementForm from './ResourceManagement'; 
 import TaskManagementForm from './TaskManagementForm';
 import "./DashboardForm.css" 
+import { useParams } from 'react-router-dom';
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [messages, setMessages] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
+  let { userId } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,9 +19,9 @@ const Dashboard = () => {
         const eventsResponse = await axios.get('http://127.0.0.1:5555/events');
         setEvents(eventsResponse.data);
 
-        const tasksResponse = await axios.get('http://127.0.0.1:5555/task');
-        setTasks(tasksResponse.data);
-        setFilteredTasks(tasksResponse.data);
+        // const tasksResponse = await axios.get('http://127.0.0.1:5555/task');
+        // setTasks(tasksResponse.data);
+        // setFilteredTasks(tasksResponse.data);
 
         // const messagesResponse = await axios.get('/api/messages');
         // setMessages(messagesResponse.data);
@@ -83,17 +85,24 @@ console.log(events)
 
   return (
     <div className='parent'>
-      <h1>Dashboard</h1>
-      <h2>Upcoming Events</h2>
-      {events.map(event => (
-        <div key={event.id}>
-          <h3>{event.title}</h3>
-          <p>{event.date} at {event.time}</p>
-          <p>{event.location}</p>
-          <p>{event.description}</p>
+     
+  <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+  <h2 className="text-2xl font-semibold mb-2">Upcoming Events</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {events.map(event => (
+      <div key={event.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="p-4">
+          <a href='/event/:id'><h3 className="text-lg font-bold text-blue-800 mb-1">{event.title}</h3></a>
+          <p className="text-sm text-gray-600 mb-1">{event.date} at {event.time}</p>
+          <p className="text-sm text-gray-600 mb-2">Location: {event.location}</p>
+          <p className="text-sm text-gray-700">{event.description}</p>
         </div>
-      ))}
-      <h2>Tasks</h2>
+      </div>
+    ))}
+  </div>
+
+
+      {/* <h2>Tasks</h2>
       <div>
         <button onClick={() => handleTaskFilter('all')}>All</button>
         <button onClick={() => handleTaskFilter('completed')}>Completed</button>
@@ -133,10 +142,10 @@ console.log(events)
         {messages.map(message => (
           <li key={message.id}>{message.content}</li>
         ))}
-      </ul>
+      </ul> */}
 
-      <ResourceManagementForm />
-      <TaskManagementForm onTaskAdded={handleTaskAdded} />
+      {/* <ResourceManagementForm /> */}
+      {/* <TaskManagementForm onTaskAdded={handleTaskAdded} /> */}
     </div>
   );
 };

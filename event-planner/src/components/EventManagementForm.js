@@ -9,7 +9,6 @@ const EventManagementForm = ({ onSubmit }) => {
     location: '',
     description: '',
     category:'',
-    organizer_id:''
 
   });
   const [eventFormErrors, setEventFormErrors] = useState({});
@@ -53,17 +52,17 @@ const EventManagementForm = ({ onSubmit }) => {
         time: '',
         location: '',
         description: '',
-        organizer_id:'',
         category:''
       });
       setEventFormErrors({});
 
     }
-    if(eventForm.title && eventForm.date && eventForm.time && eventForm.location && eventForm.description && eventForm.organizer_id && eventForm.category){
+    if(eventForm.title && eventForm.date && eventForm.time && eventForm.location && eventForm.description  && eventForm.category){
       fetch('http://127.0.0.1:5555/events',{
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
         method: "POST",
         body:JSON.stringify(eventForm)
@@ -90,7 +89,7 @@ const EventManagementForm = ({ onSubmit }) => {
         <textarea name="description" placeholder="Description" value={eventForm.description} onChange={handleEventFormChange} />
         {eventFormErrors.description && <div className="error-message">{eventFormErrors.description}</div>}
         <input type="text" name="category" placeholder="Category" value={eventForm.category} onChange={handleEventFormChange} />
-        <input type="text" name="organizer_id" placeholder="Organizer_id" value={eventForm.organizer_id} onChange={handleEventFormChange} />
+        {/* <input type="text" name="organizer_id" placeholder="Organizer_id" value={eventForm.organizer_id} onChange={handleEventFormChange} /> */}
         <button type="submit">Add Event</button>
       </form>
     </div>

@@ -12,7 +12,7 @@ const TaskManagementForm = ({ onTaskAdded }) => {
     user_id: 0,
     completed:"",
     event_id:0,
-    organizer_id:0
+    // organizer_id:0
 
   });
   const [taskFormErrors, setTaskFormErrors] = useState({});
@@ -49,7 +49,8 @@ console.log(taskForm)
       fetch('http://127.0.0.1:5555/task',{
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
         method: "POST",
         body:JSON.stringify(taskForm)
@@ -65,7 +66,7 @@ console.log(taskForm)
       user_id: 0,
       completed:"",
       event_id:0,
-      organizer_id:0
+      // organizer_id:0
   
     })
   };
@@ -81,7 +82,7 @@ console.log(taskForm)
         {taskFormErrors.description && <div className="error">{taskFormErrors.description}</div>} 
         <input type="text" name="completed" value={taskForm.completed} placeholder='True or false' onChange={handleTaskFormChange} />
         <input type="text" name="user_id" value={taskForm.user_id} placeholder='user_id' onChange={handleTaskFormChange} />
-        <input type="text" name="organizer_id" value={taskForm.organizer_id} placeholder='orgaizer_id' onChange={handleTaskFormChange} />
+        {/* <input type="text" name="organizer_id" value={taskForm.organizer_id} placeholder='orgaizer_id' onChange={handleTaskFormChange} /> */}
 
         <input type="text" name="event_id" value={taskForm.event_id} placeholder='event_id' onChange={handleTaskFormChange} />
         <button type="submit">Add a Task</button>
