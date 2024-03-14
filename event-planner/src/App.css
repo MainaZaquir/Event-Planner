@@ -1,13 +1,11 @@
-/* Reset default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Global styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   /*background-image: url('/public/image/download.jpg'); /* Replace with your actual image path */
   background-size: cover;
   background-repeat: no-repeat;
@@ -15,7 +13,6 @@ body {
   background-color: #f9f9f9; 
 }
 
-/* Header styles */
 header {
   background-color: #333;
   color: #fff;
@@ -24,10 +21,9 @@ header {
 }
 
 header h1 {
-  font-size: 24px;
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Features section styles */
 .features {
   display: flex;
   justify-content: space-around;
@@ -44,7 +40,6 @@ header h1 {
   margin-bottom: 10px;
 }
 
-/* Footer styles */
 footer {
   background-color: #333;
   color: #fff;
