@@ -20,7 +20,7 @@ function App() {
     return (
 
         <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <hr />
         <Routes>
             <Route path="/" element={<LandingPage />} />

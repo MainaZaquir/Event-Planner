@@ -16,7 +16,7 @@ function Home() {
             <ul className='hidden md:flex cursor-pointer'>
               <a href='/dashboard'><li className='p-4 text-blue-500'>Dashboard</li></a> 
               <a href='/events'><li className='p-4 text-blue-500'>Event</li></a>
-              <a href='/contact' className='p-4 text-blue-500'>About</a>
+              <a href='/tasks' className='p-4 text-blue-500'>Task</a>
               <a href='/login'><li className='p-4 text-blue-500'>Login</li></a> 
               
               <a href='/register'><li className='p-4 px-12 font-bold text-blue-500'>Sign Up</li></a>

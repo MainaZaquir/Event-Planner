@@ -3,11 +3,12 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    padding-top: 100px;
 }
 
-.task-management-form h2 {
+/* .task-management-form h2 {
     margin-bottom: 20px;
-}
+} */
 
 .task-management-form form {
     display: flex;
