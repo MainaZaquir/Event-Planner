@@ -1,56 +1,41 @@
-/* Reset default styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Global styles */
-  .landing-page {
-    font-family: Arial, sans-serif;
-     background-image: url('./download.jpg');
-     /* Replace with your actual image path */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-color: #f9f9f9; 
-    margin-top: 80px;
-  }
-  
-  /* Header styles */
-  header {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-  }
-  
-  header h1 {
-    font-size: 24px;
-  }
-  
-  /* Features section styles */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  /* grid-template-columns: repeat(2, 1fr);  */
+  gap: 20px; 
+  padding: 40px; 
+}
+
+.feature {
+  background-color: #fff; 
+  padding: 20px;
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  text-align: center; 
+  max-width: 300px; 
+}
+
+.landing-page {
+  background-image: none;
+  background-color: #f9f9f9; 
+  margin-top: 80px;
+}
+
+@media (max-width: 768px) {
   .features {
-    display: flex;
-    justify-content: space-around;
-    padding: 40px 0;
+      grid-template-columns: 1fr; 
   }
-  
-  .feature {
-    text-align: center;
-    max-width: 300px;
-  }
-  
-  .feature h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  /* Footer styles */
-  footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-  }
-  
+}
+
+header, footer {
+  background-color: #333;
+  color: #fff; 
+  text-align: center;
+  padding: 20px 0;
+}

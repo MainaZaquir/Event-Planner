@@ -10,30 +10,32 @@ import CollaborationForm from './components/CollaborationForm';
 import BudgetManagementForm from './components/BudgetManagementForm';
 import LandingPage from './components/LandingPage';
 import './App.css';
+import './components/LandingPage.css'
 import './components/LoginForm.css';
 import Navbar from './components/NavBar';
 
 
 function App() {
-  return (
-   
-      <div>
+
+    return (
+
+        <div>
         <Navbar />
         <hr />
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/dashboard" element={<DashboardForm />} />
-          <Route path="/events" element={<EventManagementForm />} />
-          <Route path="/tasks" element={<TaskManagementForm />} />
-          <Route path="/resources" element={<ResourceManagement />} />
-          <Route path="/collaboration" element={<CollaborationForm />} />
-          <Route path="/budget" element={<BudgetManagementForm />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegistrationForm />} />
+            <Route path="/dashboard" element={<DashboardForm />} />
+            <Route path="/events" element={<EventManagementForm />} />
+            <Route path="/tasks" element={<TaskManagementForm />} />
+            <Route path="/resources" element={<ResourceManagement />} />
+            <Route path="/collaboration" element={<CollaborationForm />} />
+            <Route path="/budget" element={<BudgetManagementForm />} />
         </Routes>
-      </div>
-   
-  );
+        </div>
+
+    );
 }
 
 export default App;
