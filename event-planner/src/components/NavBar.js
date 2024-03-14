@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom';
 
 const NavLinks = ({className}) => (
   <ul className={className}>
-    <Link to='/home'><li className='p-4 px-12 font-bold text-blue-500'>Dashboard</li></Link>
-    <Link to='/report'><li className='p-4 px-12 font-bold text-blue-500'>Event</li></Link>
-    <Link to='/contact'><li className='p-4 px-12 font-bold text-blue-500'>About</li></Link>
+    <Link to='/dashboard'><li className='p-4 px-12 font-bold text-blue-500'>Dashboard</li></Link>
+    <Link to='/events'><li className='p-4 px-12 font-bold text-blue-500'>Event</li></Link>
+    <Link to='/'><li className='p-4 px-12 font-bold text-blue-500'>About</li></Link>
     <Link to='/login'><li className='p-4 px-12 font-bold text-blue-500'>Login</li></Link>
-    <Link to='/signup'><li className='p-4 px-12 font-bold text-blue-500'>Sign Up</li></Link>
+    <Link to='/register'><li className='p-4 px-12 font-bold text-blue-500'>Sign Up</li></Link>
     <Link to='/users'><li className='p-4 px-12 font-bold text-blue-500'>My Profile</li></Link>
   </ul>
 );
