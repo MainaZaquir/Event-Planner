@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
 import './LoginForm.css'; 
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const navigate=useNavigate()
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -26,10 +28,23 @@ function Login() {
         e.preventDefault();
         setError(null);
         try {
-            setTimeout(async () => {
-                const response = await axios.post('http://127.0.0.1:5555/login', formData); 
-                console.log(response); 
-            }, 1000);
+            // setTimeout(async () => {
+            //     const response = await axios.post('http://127.0.0.1:5555/login', formData); 
+            //     console.log(response); 
+            // }, 1000);
+            fetch('http://127.0.0.1:5555/login',{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  method: "POST",
+                  body:JSON.stringify(formData)
+            })
+            .then(r => r.json())
+            .then(data => {
+                localStorage.setItem('jwt',data[1].token)
+                navigate('/')
+            })
         } catch (error) {
             console.error('Login failed:', error);
             setError('Invalid email or password. Please try again.');
