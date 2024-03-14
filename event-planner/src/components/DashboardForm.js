@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ResourceManagementForm from './ResourceManagement'; 
-import TaskManagementForm from './TaskManagementForm'; 
+import TaskManagementForm from './TaskManagementForm';
+import "./DashboardForm.css" 
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
@@ -13,15 +14,15 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsResponse = await axios.get('/api/events');
+        const eventsResponse = await axios.get('http://127.0.0.1:5555/events');
         setEvents(eventsResponse.data);
 
-        const tasksResponse = await axios.get('/api/tasks');
+        const tasksResponse = await axios.get('http://127.0.0.1:5555/task');
         setTasks(tasksResponse.data);
         setFilteredTasks(tasksResponse.data);
 
-        const messagesResponse = await axios.get('/api/messages');
-        setMessages(messagesResponse.data);
+        // const messagesResponse = await axios.get('/api/messages');
+        // setMessages(messagesResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -29,7 +30,7 @@ const Dashboard = () => {
 
     fetchData();
   }, []);
-
+console.log(events)
   const handleTaskFilter = (category) => {
     let filtered = [];
     if (category === 'all') {
@@ -81,7 +82,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className='parent'>
       <h1>Dashboard</h1>
       <h2>Upcoming Events</h2>
       {events.map(event => (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './EventManagementForm.css'
 
 const EventManagementForm = ({ onSubmit }) => {
@@ -7,7 +7,10 @@ const EventManagementForm = ({ onSubmit }) => {
     date: '',
     time: '',
     location: '',
-    description: ''
+    description: '',
+    category:'',
+    organizer_id:''
+
   });
   const [eventFormErrors, setEventFormErrors] = useState({});
 
@@ -43,17 +46,34 @@ const EventManagementForm = ({ onSubmit }) => {
   const handleSubmitEventForm = (e) => {
     e.preventDefault();
     if (validateEventForm()) {
-      onSubmit(eventForm);
+      // onSubmit(eventForm);
       setEventForm({
         title: '',
         date: '',
         time: '',
         location: '',
-        description: ''
+        description: '',
+        organizer_id:'',
+        category:''
       });
       setEventFormErrors({});
+
     }
+    if(eventForm.title && eventForm.date && eventForm.time && eventForm.location && eventForm.description && eventForm.organizer_id && eventForm.category){
+      fetch('http://127.0.0.1:5555/events',{
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body:JSON.stringify(eventForm)
+        
+      
+    })
+    } 
   };
+  console.log(eventForm)
+
 
   return (
     <div className="event-form">
@@ -69,6 +89,8 @@ const EventManagementForm = ({ onSubmit }) => {
         {eventFormErrors.location && <div className="error-message">{eventFormErrors.location}</div>}
         <textarea name="description" placeholder="Description" value={eventForm.description} onChange={handleEventFormChange} />
         {eventFormErrors.description && <div className="error-message">{eventFormErrors.description}</div>}
+        <input type="text" name="category" placeholder="Category" value={eventForm.category} onChange={handleEventFormChange} />
+        <input type="text" name="organizer_id" placeholder="Organizer_id" value={eventForm.organizer_id} onChange={handleEventFormChange} />
         <button type="submit">Add Event</button>
       </form>
     </div>

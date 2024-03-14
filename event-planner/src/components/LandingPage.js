@@ -3,12 +3,10 @@ import { createRoot } from 'react-dom';
 import Navbar from './NavBar';
 import './LandingPage.css';
 
+
 function LandingPage() {
     return (
-        <>
-        <Navbar />
         <div className="landing-page">
-            
             <header>
                 <h1>Welcome to Event Planning Hub</h1>
                 <p>Efficiently plan and organize all your events with us!</p>
@@ -43,12 +41,7 @@ function LandingPage() {
                 <p>© 2024 Event Planning Hub</p>
             </footer>
         </div>
-        </>
     );
 }
-
-const root = document.getElementById('root');
-const app = createRoot(root);
-app.render(<LandingPage />);
 
 export default LandingPage;

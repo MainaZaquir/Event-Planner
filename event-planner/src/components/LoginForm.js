@@ -4,7 +4,7 @@ import './LoginForm.css';
 
 function Login() {
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: ''
     });
     const [error, setError] = useState(null);
@@ -27,8 +27,8 @@ function Login() {
         setError(null);
         try {
             setTimeout(async () => {
-                const response = await axios.post('/api/login', formData); 
-                console.log(response.data); 
+                const response = await axios.post('http://127.0.0.1:5555/login', formData); 
+                console.log(response); 
             }, 1000);
         } catch (error) {
             console.error('Login failed:', error);
@@ -44,7 +44,7 @@ function Login() {
                         <h2>Login Form</h2>
                         <div className="inputbox">
                             <ion-icon name={showPassword ? "eye-outline" : "eye-off-outline"}></ion-icon>
-                            <input type="email" name="email" placeholder="Enter Email" value={formData.email} onChange={handleChange} required />
+                            <input type="username" name="username" placeholder="Enter Username" value={formData.username} onChange={handleChange} required />
                         </div>
                         <div className="inputbox">
                             <ion-icon name="lock-closed-outline"></ion-icon>
@@ -71,7 +71,7 @@ function Login() {
                         </div>
                         <button type="submit">Login</button>
                         <div className="register">
-                            <p>No account <a href="#">Register here</a></p>
+                            <p>No account <a href="register">Register here</a></p>
                         </div>
                     </form>
                 </div>
