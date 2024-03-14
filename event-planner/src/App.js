@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
@@ -16,7 +16,34 @@ import Navbar from './components/NavBar';
 
 
 function App() {
-
+    const [user , setUser]=useState({})
+    useEffect(() => {
+        const checkSession = () => {
+          fetch("http://127.0.0.1:5555/check_session", {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            },
+          })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Failed to check session');
+            }
+          })
+          .then(userData => {
+            console.log(userData);
+            // navigate(window.location.pathname); 
+            setUser(userData)
+          })
+          .catch(error => {
+            console.error('Error checking session:', error);
+          });
+        };
+    checkSession();
+    
+      }, []);
     return (
 
         <div>
@@ -27,11 +54,11 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegistrationForm />} />
             <Route path="/dashboard" element={<DashboardForm />} />
-            <Route path="/events" element={<EventManagementForm />} />
-            <Route path="/tasks" element={<TaskManagementForm />} />
-            <Route path="/resources" element={<ResourceManagement />} />
+            <Route path="/events" element={<EventManagementForm user={user} />} />
+            <Route path="/tasks" element={<TaskManagementForm user={user} />} />
+            <Route path="/resources" element={<ResourceManagement user={user} />} />
             <Route path="/collaboration" element={<CollaborationForm />} />
-            <Route path="/budget" element={<BudgetManagementForm />} />
+            <Route path="/budget" element={<BudgetManagementForm user={user} />} />
         </Routes>
         </div>
 

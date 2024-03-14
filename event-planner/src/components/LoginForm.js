@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
 import './LoginForm.css'; 
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const navigate=useNavigate()
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: ''
     });
     const [error, setError] = useState(null);
@@ -26,10 +28,23 @@ function Login() {
         e.preventDefault();
         setError(null);
         try {
-            setTimeout(async () => {
-                const response = await axios.post('/api/login', formData); 
-                console.log(response.data); 
-            }, 1000);
+            // setTimeout(async () => {
+            //     const response = await axios.post('http://127.0.0.1:5555/login', formData); 
+            //     console.log(response); 
+            // }, 1000);
+            fetch('http://127.0.0.1:5555/login',{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  method: "POST",
+                  body:JSON.stringify(formData)
+            })
+            .then(r => r.json())
+            .then(data => {
+                localStorage.setItem('jwt',data[1].token)
+                navigate('/')
+            })
         } catch (error) {
             console.error('Login failed:', error);
             setError('Invalid email or password. Please try again.');
@@ -44,7 +59,7 @@ function Login() {
                         <h2>Login Form</h2>
                         <div className="inputbox">
                             <ion-icon name={showPassword ? "eye-outline" : "eye-off-outline"}></ion-icon>
-                            <input type="email" name="email" placeholder="Enter Email" value={formData.email} onChange={handleChange} required />
+                            <input type="username" name="username" placeholder="Enter Username" value={formData.username} onChange={handleChange} required />
                         </div>
                         <div className="inputbox">
                             <ion-icon name="lock-closed-outline"></ion-icon>
@@ -71,7 +86,7 @@ function Login() {
                         </div>
                         <button type="submit">Login</button>
                         <div className="register">
-                            <p>No account <a href="#">Register here</a></p>
+                            <p>No account <a href="register">Register here</a></p>
                         </div>
                     </form>
                 </div>
