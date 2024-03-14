@@ -3,12 +3,10 @@ import axios from 'axios';
 import './RegistrationForm.css'; 
 import { Link } from 'react-router-dom';
 
-
 const RegistrationForm = () => {
   const [firstName, setfirstName] = useState('');
   const[lastname,setlastname] = useState('');
   const [email, setCompanyEmail] = useState('');
-  const [companyNumber, setCompanyNumber] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -41,21 +39,21 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="card-container"> 
+    <div className="container"> 
       <div className="card">
         <h1>Have an event coming up? Sign up with us for your ticket management.</h1>
         <form className="sign-up-form" onSubmit={handleSubmit}> 
-          <label htmlFor="first name">fist Name:</label><br />
+          <label htmlFor="first name">First Name:</label><br />
           <input
             type="text"
             id="First Name"
             name="First Name"
             value={firstName}
-            onChange={(e) => firstName(e.target.value)}
+            onChange={(e) => setfirstName(e.target.value)}
             required
             className="form-input" 
           /><br />
-           <label htmlFor="last name">last Name:</label><br />
+            <label htmlFor="last name">Last Name:</label><br />
           <input
             type="text"
             id="last Name"
@@ -65,7 +63,7 @@ const RegistrationForm = () => {
             required
             className="form-input" 
           /><br />
-          <label htmlFor="user email">user Email:</label><br />
+          <label htmlFor="user email">User Email:</label><br />
           <input
             type="email"
             id="user email"
@@ -75,18 +73,6 @@ const RegistrationForm = () => {
             required
             className="form-input"
           /><br />
-          {/* <label htmlFor="company_number">Company Number:</label><br />
-          <input
-            type="tel"
-            id="company_number"
-            name="company_number"
-            inputMode="numeric"
-            pattern="[0-9]{10}"
-            value={companyNumber}
-            onChange={(e) => setCompanyNumber(e.target.value)} */}
-            {/* required
-            className="form-input"
-          /><br /> */}
           <label htmlFor="new_password">Enter New Password:</label><br />
           <input
             type="password"
@@ -111,7 +97,7 @@ const RegistrationForm = () => {
           /><br />
           <button type="submit" className="form-button">Sign Up</button> 
         </form>
-        <p>Already have an account? <Link to="/login">Log in.</Link></p>
+        <p className="register">Already have an account? <Link to="/login">Log in.</Link></p>
       </div>
     </div>
   );
