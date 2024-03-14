@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom'; 
-import Navbar from './NavBar';
+// import Navbar from './NavBar';
 import './LandingPage.css';
 
 
