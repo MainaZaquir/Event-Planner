@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 
 const BudgetManagementForm = ({ budget, onSubmit }) => {
   const [expenseForm, setExpenseForm] = useState({
-    description: '',
-    amount: '',
-    category: ''
+    event_id: '',
+    total: 0,
   });
   const [expenseFormErrors, setExpenseFormErrors] = useState({});
 
@@ -18,29 +17,33 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
 
   const validateExpenseForm = () => {
     let errors = {};
-    if (!expenseForm.description.trim()) {
-      errors.description = 'A description is required';
+    if (!expenseForm.event_id.trim()) {
+      errors.event_id = 'A event_id is required';
     }
-    if (!expenseForm.amount.trim()) {
-      errors.amount = 'An amount is required';
-    } else if (isNaN(expenseForm.amount)) {
-      errors.amount = 'The amount must be a number';
-    }
-    if (!expenseForm.category.trim()) {
-      errors.category = 'A category is required';
-    }
-    setExpenseFormErrors(errors);
-    return Object.keys(errors).length === 0;
+    fetch(`http://127.0.0.1:5555/budgets`,{
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        },
+        method: "POST",
+        body:JSON.stringify(expenseForm)})
+    // if (!expenseForm.total) {
+    //   errors.total = 'An total is required';
+    // } else if (isNaN(expenseForm.amount)) {
+    //   errors.total = 'The total must be a number';
+    // }
+    //    setExpenseFormErrors(errors);
+    // return Object.keys(errors).length === 0;
   };
 
   const handleSubmitExpenseForm = (e) => {
     e.preventDefault();
     if (validateExpenseForm()) {
-      onSubmit(expenseForm);
+      // onSubmit(expenseForm);
       setExpenseForm({
-        description: '',
-        amount: '',
-        category: ''
+        event_id: '',
+        total: '',
       });
       setExpenseFormErrors({});
     }
@@ -52,13 +55,11 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
       <div>
         <h3>Budget: ${budget}</h3>
         <form onSubmit={handleSubmitExpenseForm}>
-          <input type="text" name="description" placeholder="Description" value={expenseForm.description} onChange={handleExpenseFormChange} />
-          {expenseFormErrors.description && <div className="error-message">{expenseFormErrors.description}</div>}
-          <input type="text" name="amount" placeholder="Amount" value={expenseForm.amount} onChange={handleExpenseFormChange} />
-          {expenseFormErrors.amount && <div className="error-message">{expenseFormErrors.amount}</div>}
-          <input type="text" name="category" placeholder="Category" value={expenseForm.category} onChange={handleExpenseFormChange} />
-          {expenseFormErrors.category && <div className="error-message">{expenseFormErrors.category}</div>} {/* Add validation error display */}
-          <button type="submit">Add Expense</button>
+          <input type="text" name="event_id" placeholder="event_id" value={expenseForm.event_id} onChange={handleExpenseFormChange} />
+          {expenseFormErrors.event_id && <div className="error-message">{expenseFormErrors.event_id}</div>}
+          <input type="text" name="total" placeholder="total" value={expenseForm.total} onChange={handleExpenseFormChange} />
+          {expenseFormErrors.total && <div className="error-message">{expenseFormErrors.total}</div>}
+                    <button type="submit">Add Expense</button>
         </form>
       </div>
     </div>
