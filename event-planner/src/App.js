@@ -60,7 +60,7 @@ function App() {
             <Route path="/resources" element={<ResourceManagement user={user} />} />
             <Route path="/collaboration" element={<CollaborationForm />} />
             <Route path="/budget" element={<BudgetManagementForm user={user} />} />
-            <Route path='/event/:id' element={<CollaborationForm />}/>
+            <Route path='/event/:id' element={<CollaborationForm user={user} />}/>
             <Route path='/update_event/:id' element={<UpdateEvent />}/>
         </Routes>
         </div>
