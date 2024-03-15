@@ -1,34 +1,43 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './RegistrationForm.css'; 
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
-  const [firstName, setfirstName] = useState('');
-  const[lastname,setlastname] = useState('');
+  const [first_name, setfirstName] = useState('');
+  const [last_name, setlastname] = useState('');
   const [email, setCompanyEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
+  const [password, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (newPassword !== confirmPassword) {
+    if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
 
     try {
-      const response = await axios.post('/api/register', {
-        firstName,
-        lastname,
-        email,
-        newPassword,
-        confirmPassword
+      const response = await fetch('http://127.0.0.1:5555/sign_up', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          first_name,
+          last_name,
+          username,
+          email,
+          password
+        })
       });
 
-      if (response.status === 200) {
+      if (response.ok) {
         alert('Registration was successful');
+        navigate('/login');
       } else {
         alert('Registration has failed');
       }
@@ -48,7 +57,7 @@ const RegistrationForm = () => {
             type="text"
             id="First Name"
             name="First Name"
-            value={firstName}
+            value={first_name}
             onChange={(e) => setfirstName(e.target.value)}
             required
             className="form-input" 
@@ -58,8 +67,18 @@ const RegistrationForm = () => {
             type="text"
             id="last Name"
             name="last Name"
-            value={lastname}
+            value={last_name}
             onChange={(e) => setlastname(e.target.value)}
+            required
+            className="form-input" 
+          /><br />
+           <label htmlFor="last name">Username:</label><br />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             className="form-input" 
           /><br />
@@ -79,7 +98,7 @@ const RegistrationForm = () => {
             id="password"
             name="password"
             minLength="8"
-            value={newPassword}
+            value={password}
             onChange={(e) => setNewPassword(e.target.value)}
             required
             className="form-input"
