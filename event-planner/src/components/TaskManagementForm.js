@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 // import axios
-
+import { useParams,useNavigate } from 'react-router-dom';
 import './TaskManagementForm.css'; 
 
 const TaskManagementForm = ({ onTaskAdded }) => {
+  const {id} = useParams()
   const [taskForm, setTaskForm] = useState({
     title:'',
     description: '',
     deadline: '',
     // priority: '',
     user_id: 0,
-    completed:"",
-    event_id:0,
+    completed:"False",
+    event_id:id,
     // organizer_id:0
 
   });
@@ -62,11 +63,11 @@ console.log(taskForm)
       title:'',
       description: '',
       deadline: '',
-      // priority: '',
-      user_id: 0,
+      
+      user_id: "",
       completed:"",
-      event_id:0,
-      // organizer_id:0
+      event_id:"",
+      
   
     })
   };
@@ -84,7 +85,7 @@ console.log(taskForm)
         <input type="text" name="user_id" value={taskForm.user_id} placeholder='user_id' onChange={handleTaskFormChange} />
         {/* <input type="text" name="organizer_id" value={taskForm.organizer_id} placeholder='orgaizer_id' onChange={handleTaskFormChange} /> */}
 
-        <input type="text" name="event_id" value={taskForm.event_id} placeholder='event_id' onChange={handleTaskFormChange} />
+        {/* <input type="text" name="event_id" value={taskForm.event_id} placeholder='event_id' onChange={handleTaskFormChange} /> */}
         <button type="submit">Add a Task</button>
       </form>
     </div>
