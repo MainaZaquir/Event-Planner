@@ -28,13 +28,7 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
         },
         method: "POST",
         body:JSON.stringify(expenseForm)})
-    // if (!expenseForm.total) {
-    //   errors.total = 'An total is required';
-    // } else if (isNaN(expenseForm.amount)) {
-    //   errors.total = 'The total must be a number';
-    // }
-    //    setExpenseFormErrors(errors);
-    // return Object.keys(errors).length === 0;
+   
   };
 
   const handleSubmitExpenseForm = (e) => {
