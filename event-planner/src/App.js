@@ -13,6 +13,7 @@ import './App.css';
 import './components/LandingPage.css'
 import './components/LoginForm.css';
 import Navbar from './components/NavBar';
+import UpdateEvent from './components/UpdateEvent';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
             <Route path="/collaboration" element={<CollaborationForm />} />
             <Route path="/budget" element={<BudgetManagementForm user={user} />} />
             <Route path='/event/:id' element={<CollaborationForm />}/>
+            <Route path='/update_event/:id' element={<UpdateEvent />}/>
         </Routes>
         </div>
 

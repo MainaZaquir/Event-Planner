@@ -29,7 +29,7 @@ useEffect(() => {
   };
 
   fetchData();
-}, []);
+}, [id]);
 
 const handleClick = (id) =>{
   console.log(id)
@@ -44,6 +44,11 @@ const handleClick = (id) =>{
   
   navigate('/dashboard')
   )
+}
+
+const handleUpdate = (id) =>{
+  console.log(id)
+  navigate(`/update_event/${id}`)
 }
 return (
   <div className='parent'>
@@ -60,7 +65,7 @@ return (
         <p className="text-sm text-gray-700">{event.description}</p>
 
       </div>
-      <a href='/events'><button>Update</button></a><br />
+      <button onClick={() => handleUpdate(event.id)}>Update</button><br />
       <button onClick={() => handleClick(event.id)}>Delete</button>
     </div>
   
