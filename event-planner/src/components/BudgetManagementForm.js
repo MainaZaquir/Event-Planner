@@ -14,6 +14,7 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
       [name]: value
     }));
   };
+  
 
   const validateExpenseForm = () => {
     let errors = {};
@@ -37,9 +38,29 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
       // onSubmit(expenseForm);
       setExpenseForm({
         event_id: '',
-        total: '',
+        total:0,
       });
       setExpenseFormErrors({});
+    }
+  };
+  const handleDeleteExpense = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5555/budgets/${budget.id}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        },
+        method: "DELETE"
+      });
+      if (response.ok) {
+        console.log('Expense deleted successfully');
+      } else {
+        const errorData = await response.json();
+        console.error('Error deleting expense:', errorData.message);
+      }
+    } catch (error) {
+      console.error('Error deleting expense:', error.message);
     }
   };
 
@@ -55,6 +76,7 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
           {expenseFormErrors.total && <div className="error-message">{expenseFormErrors.total}</div>}
                     <button type="submit">Add Expense</button>
         </form>
+        <button onClick={handleDeleteExpense}>Delete Expense</button>
       </div>
     </div>
   );
