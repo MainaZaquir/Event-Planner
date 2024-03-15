@@ -1,6 +1,3 @@
-import React from 'react';
-import { createRoot } from 'react-dom'; 
-// import Navbar from './NavBar';
 import './LandingPage.css';
 
 
@@ -56,9 +53,7 @@ function LandingPage() {
 }
 
 
-const root = document.getElementById('root');
-const app = createRoot(root);
-app.render(<LandingPage />);
+
 
 export default LandingPage;
 

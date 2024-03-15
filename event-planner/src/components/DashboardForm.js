@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ResourceManagementForm from './ResourceManagement'; 
 import TaskManagementForm from './TaskManagementForm';
 import "./DashboardForm.css" 
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [messages, setMessages] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
   let { userId } = useParams();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,12 +20,7 @@ const Dashboard = () => {
         const eventsResponse = await axios.get('http://127.0.0.1:5555/events');
         setEvents(eventsResponse.data);
 
-        // const tasksResponse = await axios.get('http://127.0.0.1:5555/task');
-        // setTasks(tasksResponse.data);
-        // setFilteredTasks(tasksResponse.data);
-
-        // const messagesResponse = await axios.get('/api/messages');
-        // setMessages(messagesResponse.data);
+       
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -82,7 +78,11 @@ console.log(events)
     setTasks(prevTasks => [...prevTasks, newTask]);
     setFilteredTasks(prevTasks => [...prevTasks, newTask]);
   };
+ const handleClick =(id) =>{
+  // console.log(id)
+  navigate(`/event/${id}`)
 
+ }
   return (
     <div className='parent'>
      
@@ -92,7 +92,7 @@ console.log(events)
     {events.map(event => (
       <div key={event.id} className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="p-4">
-          <a href='/event/:id'><h3 className="text-lg font-bold text-blue-800 mb-1">{event.title}</h3></a>
+          <h3 onClick={() => handleClick(event.id)} className="text-lg font-bold text-blue-800 mb-1">{event.title}</h3>
           <p className="text-sm text-gray-600 mb-1">{event.date} at {event.time}</p>
           <p className="text-sm text-gray-600 mb-2">Location: {event.location}</p>
           <p className="text-sm text-gray-700">{event.description}</p>
