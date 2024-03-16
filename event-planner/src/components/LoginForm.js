@@ -43,7 +43,7 @@ function Login() {
             .then(r => r.json())
             .then(data => {
                 localStorage.setItem('jwt',data[1].token)
-                navigate('/')
+                navigate('/dashboard')
             })
         } catch (error) {
             console.error('Login failed:', error);

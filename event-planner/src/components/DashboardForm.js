@@ -41,16 +41,6 @@ const Dashboard = () => {
     setFilteredTasks(filtered);
   };
 
-  const handleDeleteTask = async (taskId) => {
-    try {
-      await axios.delete(`/api/tasks/${taskId}`);
-      const updatedTasks = tasks.filter(task => task.id !== taskId);
-      setTasks(updatedTasks);
-      setFilteredTasks(updatedTasks);
-    } catch (error) {
-      console.error('Error deleting task:', error);
-    }
-  };
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);

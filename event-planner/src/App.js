@@ -14,6 +14,7 @@ import './components/LandingPage.css'
 import './components/LoginForm.css';
 import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
+import TaskAssignment from './components/TaskAssignment';
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
             <Route path="/budget" element={<BudgetManagementForm user={user} />} />
             <Route path='/event/:id' element={<CollaborationForm user={user} />}/>
             <Route path='/update_event/:id' element={<UpdateEvent />}/>
+            <Route path='/task_assign' element={<TaskAssignment user={user} />}/>
         </Routes>
         </main>
         </div>
