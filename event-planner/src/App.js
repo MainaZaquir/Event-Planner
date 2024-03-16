@@ -50,6 +50,7 @@ function App() {
         <div>
         <Navbar />
         <hr />
+        <main>
         <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginForm />} />
@@ -63,6 +64,7 @@ function App() {
             <Route path='/event/:id' element={<CollaborationForm user={user} />}/>
             <Route path='/update_event/:id' element={<UpdateEvent />}/>
         </Routes>
+        </main>
         </div>
 
     );
