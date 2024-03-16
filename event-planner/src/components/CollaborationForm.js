@@ -97,14 +97,14 @@ const CollaborationForm = ({ user }) => {
             
             task.organizer_id === user.user_id  ?
               <div key={task.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <h3>Resource</h3>
+                <h4>Resource</h4>
                 <div className="p-4">
                   <h3 className="text-lg font-bold text-blue-800 mb-1">{task.name}</h3>
                   <p className="text-sm text-gray-600 mb-2">quantity: {task.quantity}</p>
                   <button onClick={() => handleDeleteResource(task.id)}>Delete</button>
                 </div>
               </div> : (task.event_id === event.id  ? <div key={task.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <h3>Resource</h3>
+                <h4>Resource</h4>
                 <div className="p-4">
                   <h3 className="text-lg font-bold text-blue-800 mb-1">{task.name}</h3>
                   <p className="text-sm text-gray-600 mb-2">quantity: {task.quantity}</p>
@@ -150,7 +150,7 @@ const CollaborationForm = ({ user }) => {
             
             
                (task.event_id === event.id  ? <div key={task.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <h3>Resource</h3>
+                <h4>Resource</h4>
                 <div className="p-4">
                   <h3 className="text-lg font-bold text-blue-800 mb-1">{task.name}</h3>
                   <p className="text-sm text-gray-600 mb-2">quantity: {task.quantity}</p>

@@ -17,7 +17,7 @@ const TaskAssignment = ({user}) => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5555/task'); // Adjust the endpoint URL
+      const response = await axios.get('http://127.0.0.1:5555/task'); 
       setTasks(response.data);
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -26,7 +26,7 @@ const TaskAssignment = ({user}) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5555/users'); // Adjust the endpoint URL
+      const response = await axios.get('http://127.0.0.1:5555/users'); 
       setUsers(response.data.map(user => ({ value: user.id, label: user.username })));
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -58,7 +58,7 @@ const TaskAssignment = ({user}) => {
       })
       .then((data) => {
         console.log(data.message);
-        fetchTasks(); // Refresh task list after assignment
+        fetchTasks(); 
       })
       .catch((error) => {
         console.error('Error assigning task:', error);
@@ -68,7 +68,7 @@ const TaskAssignment = ({user}) => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Task Assignment</h2>
+      <h3 className="text-2xl font-bold ">Task Assignment</h3>
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="flex flex-col mb-4">
           <label htmlFor="task_id" className="mb-1">Task ID:</label>

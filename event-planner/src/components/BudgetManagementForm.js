@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-const BudgetManagementForm = ({ budget, onSubmit }) => {
+const BudgetManagementForm = ({ budget, onSubmit,user }) => {
   const [budgetData, setBudgetData] = useState([]);
   const [expenseForm, setExpenseForm] = useState({
     event_id: '',
     total: 0,
   });
   const [expenseFormErrors, setExpenseFormErrors] = useState({});
+  const [eventOptions, setEventOptions] = useState([]);
 
   const handleExpenseFormChange = (e) => {
     const { name, value } = e.target;
@@ -20,21 +21,14 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
   const validateExpenseForm = () => {
     let errors = {};
     if (!expenseForm.event_id.trim()) {
-      errors.event_id = 'A event_id is required';
+      errors.event_id = 'An event ID is required';
     }
-    fetch(`http://127.0.0.1:5555/budgets`,{
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-        },
-        method: "POST",
-        body:JSON.stringify(expenseForm)})
-   
+    return errors;
   };
 
   useEffect(() => {
     fetchBudgetData();
+    fetchEventOptions();
   }, []);
 
   const fetchBudgetData = async () => {
@@ -58,15 +52,39 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
     }
   };
 
-   const handleSubmitExpenseForm = (e) => {
+  const fetchEventOptions = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5555/events', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+      });
+console.log(eventOptions)
+      if (response.ok) {
+        const data = await response.json();
+        setEventOptions(data.map(event => ({ value: event.id, label: event.id }))); 
+      } else {
+        console.error('Failed to fetch event options');
+      }
+    } catch (error) {
+      console.error('Error fetching event options:', error.message);
+    }
+  };
+
+  const handleSubmitExpenseForm = (e) => {
     e.preventDefault();
-    if (validateExpenseForm()) {
-      // onSubmit(expenseForm);
+    const errors = validateExpenseForm();
+    if (Object.keys(errors).length === 0) {
+      onSubmit(expenseForm);
       setExpenseForm({
         event_id: '',
         total: '',
       });
       setExpenseFormErrors({});
+    } else {
+      setExpenseFormErrors(errors);
     }
   };
 
@@ -93,16 +111,26 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
   };
 
   return (
-    <div className="budget-management-container">
-      <h2>Budget Management and Expense Tracking</h2>
+    <div className="budget-management-container"><br /> <br /> <br /> <br />
+      <h4>Budget Management and Expense Tracking</h4>
       <h5 className="card-title">Add an Expense</h5>
       <div>
         <form onSubmit={handleSubmitExpenseForm}>
-          <input type="text" name="event_id" placeholder="event_id" value={expenseForm.event_id} onChange={handleExpenseFormChange} />
+          <select
+            name="event_id"
+            value={expenseForm.event_id}
+            onChange={handleExpenseFormChange}
+            className="form-select"
+          >
+            <option value="">Select Event</option>
+            {eventOptions.map(option => (
+              user.user_id === option.organizer_id ?<option key={option.value} value={option.value}>{option.label}</option>:null
+            ))}
+          </select>
           {expenseFormErrors.event_id && <div className="error-message">{expenseFormErrors.event_id}</div>}
-          <input type="text" name="total" placeholder="total" value={expenseForm.total} onChange={handleExpenseFormChange} />
+          <input type="text" name="total" placeholder="Total" value={expenseForm.total} onChange={handleExpenseFormChange} className="form-control" />
           {expenseFormErrors.total && <div className="error-message">{expenseFormErrors.total}</div>}
-          <button type="submit">Add Expense</button>
+          <button type="submit" className="btn btn-primary">Add Expense</button>
         </form>
       </div>
       <div className="card">
@@ -114,22 +142,18 @@ const BudgetManagementForm = ({ budget, onSubmit }) => {
                 <th>ID</th>
                 <th>Event ID</th>
                 <th>Total</th>
-                {/* <th>Organizer ID</th> */}
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {/* Here goes your data mapped to table rows */}
               {budgetData.map((expense, index) => (
                 <tr key={index}>
                   <td>{expense.id}</td>
                   <td>{expense.event_id}</td>
                   <td>{expense.total}</td>
-                  {/* <td>{expense.organizer_id}</td> */}
-                  <td><button onClick={() => handleDeleteExpense(expense.id)}>Delete</button></td>
+                  <td><button onClick={() => handleDeleteExpense(expense.id)} className="btn btn-danger">Delete</button></td>
                 </tr>
               ))}
-              {/* More rows as needed */}
             </tbody>
           </table>
         </div>

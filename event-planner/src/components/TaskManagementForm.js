@@ -74,7 +74,7 @@ console.log(taskForm)
 
   return (
     <div className="task-management-container"> 
-      <h2>Add a Task</h2>
+      <h4>Add a Task</h4>
       <form onSubmit={handleSubmitTaskForm} className="task-form"> 
       <input type="text" name="title" value={taskForm.title} placeholder='title' onChange={handleTaskFormChange} />
       <input type="date" name="deadline" value={taskForm.deadline}  onChange={handleTaskFormChange} />

@@ -76,7 +76,7 @@ const EventManagementForm = ({ onSubmit }) => {
 
   return (
     <div className="event-form">
-      <h2>Add a New Event</h2>
+      <h4>Add a New Event</h4>
       <form onSubmit={handleSubmitEventForm}>
         <input type="text" name="title" placeholder="Title" value={eventForm.title} onChange={handleEventFormChange} />
         {eventFormErrors.title && <div className="error-message">{eventFormErrors.title}</div>}

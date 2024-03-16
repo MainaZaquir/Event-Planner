@@ -74,7 +74,7 @@ const UpdateEvent = () => {
 
   return (
     <div className="event-form">
-      <h2>Update Event</h2>
+      <h4>Update Event</h4>
       <form onSubmit={handleSubmitEventForm}>
         <input type="text" name="title" placeholder="Title" value={eventForm.title} onChange={handleEventFormChange} />
         {eventFormErrors.title && <div className="error-message">{eventFormErrors.title}</div>}

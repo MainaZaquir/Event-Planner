@@ -11,6 +11,7 @@ const NavLinks = ({ className, isLoggedIn, handleLogout }) => {
         <Link to='/'><li className='p-4 px-12 font-bold text-blue-500'>About</li></Link>
         <Link to='/users'><li className='p-4 px-12 font-bold text-blue-500'>My Profile</li></Link>
         <Link to='/task_assign'><li className='p-4 px-12 font-bold text-blue-500'>Assign Task</li></Link>
+        <Link to='/budget'><li className='p-4 px-12 font-bold text-blue-500'>Budget</li></Link>
         <li className='p-4 px-12 font-bold text-blue-500 cursor-pointer' onClick={handleLogout}>Logout</li>
       </ul>
     );
