@@ -18,7 +18,7 @@ const ResourceManagement = ({eventId}) => {
     // }
     setResourceName()
   };
-console.log(eventId)
+// console.log(eventId)
   const validateResourceForm = () => {
     let errors = {};
     if (!name) {

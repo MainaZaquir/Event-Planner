@@ -44,7 +44,7 @@ const handleSubmit = async (e) => {
             alert("Wrong Credentials");
         }
     } catch (error) {
-        console.error('Login failed:', error);
+        // console.error('Login failed:', error);
         setError('Invalid email or password. Please try again.');
     }
 };
@@ -80,7 +80,7 @@ const handleSubmit = async (e) => {
                                     onChange={handleShowPassword} 
                                 />
                                 Show password 
-                                <a href="#">Forgot my password</a>
+                                {/* <a href="#">Forgot my password</a> */}
                             </label>
                         </div>
                         <button type="submit">Login</button>

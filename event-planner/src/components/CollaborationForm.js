@@ -89,7 +89,7 @@ const CollaborationForm = ({ user }) => {
 
     fetchData();
 }, []);
-  console.log(taskAssignments)
+  // console.log(taskAssignments)
   // console.log(resource)
   return (
     <div className='parent'>

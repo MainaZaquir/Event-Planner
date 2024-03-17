@@ -71,7 +71,7 @@ const EventManagementForm = ({ onSubmit }) => {
     })
     } 
   };
-  console.log(eventForm)
+  // console.log(eventForm)
 
 
   return (

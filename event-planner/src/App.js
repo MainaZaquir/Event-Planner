@@ -15,9 +15,10 @@ import './components/LoginForm.css';
 import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
-import UserStoryPage from './components/UserStory';
+import UserStoryPage from './components/UserStoryPage';
 // import Footer from './components/Footer';
 import {useNavigate } from 'react-router-dom';
+import Profile from './components/Profile';
 
 function App() {
     const [user , setUser]=useState({})
@@ -38,7 +39,7 @@ function App() {
             }
           })
           .then(userData => {
-            console.log(userData);
+            // console.log(userData);
             // navigate(window.location.pathname); 
             setUser(userData)
           })
@@ -70,6 +71,7 @@ function App() {
             <Route path='/update_event/:id' element={<UpdateEvent />}/>
             <Route path='/task_assign' element={<TaskAssignment user={user} />}/>
             <Route path='/user_stories' element={<UserStoryPage user={user} />}/>
+            <Route path='/users' element={<Profile user={user} />}/>
         </Routes>
         </main>
         {/* <Footer /> */}

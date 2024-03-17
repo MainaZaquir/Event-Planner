@@ -44,6 +44,7 @@ function Home() {
   };
 
   return (
+    <>
     <div className='bg-[#e7e7e5]  fixed top-0 w-full z-10 my-2'>
       <div className='flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4'>
         <a href='/dashboard'><img className='h-[75px] w-[75px]' src="https://images-workbench.99static.com/wxRe-Rdbsm4ntxzxV9lL715O5nM=/99designs-contests-attachments/122/122876/attachment_122876400" alt="/" /></a>
@@ -56,7 +57,8 @@ function Home() {
           <NavLinks className='pt-12 uppercase p-4 ' isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
         </div>
       </div>
-    </div>
+    </div><br /><br /><br />
+    </>
   );
 }
 
