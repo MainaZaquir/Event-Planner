@@ -16,7 +16,7 @@ import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
 import UserStoryPage from './components/UserStory';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import {useNavigate } from 'react-router-dom';
 
 function App() {
