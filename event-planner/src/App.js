@@ -16,7 +16,7 @@ import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
 import UserStoryPage from './components/UserStory';
-// import Footer from './components/Footer';
+import Footer from './components/Footer'; // import the Footer component
 import {useNavigate } from 'react-router-dom';
 
 function App() {
@@ -51,7 +51,6 @@ function App() {
     
       }, []);
     return (
-
         <div>
         <Navbar />
         <hr />
@@ -72,9 +71,8 @@ function App() {
             <Route path='/user_stories' element={<UserStoryPage user={user} />}/>
         </Routes>
         </main>
-        {/* <Footer /> */}
+        <Footer /> {/* use the Footer component */}
         </div>
-
     );
 }
 
