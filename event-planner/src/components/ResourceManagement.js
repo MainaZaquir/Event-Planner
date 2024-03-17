@@ -7,80 +7,118 @@ const ResourceManagement = () => {
   const [resourceType, setResourceType] = useState('');
   const [resourceLink, setResourceLink] = useState('');
   const [resourceFormErrors, setResourceFormErrors] = useState({});
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const handleResourceFormChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'resourceType') {
-      setResourceType(value);
-    } else if (name === 'resourceLink') {
-      setResourceLink(value);
-    } else {
-      setResourceName(value);
+    switch (name) {
+      case 'resourceName':
+        setResourceName(value);
+        break;
+      case 'resourceType':
+        setResourceType(value);
+        break;
+      case 'resourceLink':
+        setResourceLink(value);
+        break;
+      default:
+        break;
     }
   };
 
   const validateResourceForm = () => {
     let errors = {};
     if (!resourceName.trim()) {
-      errors.resourceName = 'A resource name is required';
+      errors.resourceName = 'Resource name is required.';
     }
     if (!resourceType.trim()) {
-      errors.resourceType = 'A resource type is required';
+      errors.resourceType = 'Resource type is required.';
     }
     if (!resourceLink.trim()) {
-      errors.resourceLink = 'A resource link is required';
+      errors.resourceLink = 'Resource link is required.';
     }
     setResourceFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmitResourceForm = (e) => {
+  const handleSubmitResourceForm = async (e) => {
     e.preventDefault();
     if (validateResourceForm()) {
-      axios.post('/api/resources', { name: resourceName, type: resourceType, link: resourceLink })
-        .then(response => {
-          console.log('A resource has been added:', response.data);
+      try {
+        const response = await axios.post('/api/resources', {
+          name: resourceName,
+          type: resourceType,
+          link: resourceLink
+        });
+        if (response.status === 200) {
+          setSubmitMessage('Successfully submitted!');
+          // Reset form fields
           setResourceName('');
           setResourceType('');
           setResourceLink('');
+          // Clear any previous errors
           setResourceFormErrors({});
-        })
-        .catch(error => {
-          console.error('Error adding resource:', error);
-        });
+        } else {
+          setSubmitMessage(`Submission failed with status code ${response.status}.`);
+        }
+      } catch (error) {
+        console.error(error);
+        setSubmitMessage(`Submission failed: ${error.message}`);
+      }
+    } else {
+      setSubmitMessage('Submission failed due to form validation error.');
     }
   };
-
+  
   return (
-    <div className="resource-form"> 
+    <div className="resource-form">
       <h2>Resource Management</h2>
       <form onSubmit={handleSubmitResourceForm}>
-        <input
-          type="text"
-          name="resourceName"
-          value={resourceName}
-          onChange={handleResourceFormChange}
-          placeholder="Resource Name"
-        />
-        {resourceFormErrors.resourceName && <div className="error">{resourceFormErrors.resourceName}</div>}
-        <input
-          type="text"
-          name="resourceType"
-          value={resourceType}
-          onChange={handleResourceFormChange}
-          placeholder="Resource Type"
-        />
-        {resourceFormErrors.resourceType && <div className="error">{resourceFormErrors.resourceType}</div>} 
-        <input
-          type="text"
-          name="resourceLink"
-          value={resourceLink}
-          onChange={handleResourceFormChange}
-          placeholder="Resource Link"
-        />
-        {resourceFormErrors.resourceLink && <div className="error">{resourceFormErrors.resourceLink}</div>} 
-        <button type="submit">Add a Resource</button>
+        <div className="form-group">
+          <label htmlFor="resourceName">Resource Name:</label>
+          <input
+            type="text"
+            id="resourceName"
+            name="resourceName"
+            value={resourceName}
+            onChange={handleResourceFormChange}
+            placeholder="Enter resource name"
+          />
+          {resourceFormErrors.resourceName && (
+            <div className="error">{resourceFormErrors.resourceName}</div>
+          )}
+        </div>
+        <div className="form-group">
+          <label htmlFor="resourceType">Resource Type:</label>
+          <input
+            type="text"
+            id="resourceType"
+            name="resourceType"
+            value={resourceType}
+            onChange={handleResourceFormChange}
+            placeholder="Enter resource type"
+          />
+          {resourceFormErrors.resourceType && (
+            <div className="error">{resourceFormErrors.resourceType}</div>
+          )}
+        </div>
+        <div className="form-group">
+          <label htmlFor="resourceLink">Resource Link:</label>
+          <input
+            type="text"
+            id="resourceLink"
+            name="resourceLink"
+            value={resourceLink}
+            onChange={handleResourceFormChange}
+            placeholder="Enter resource link"
+          />
+          {resourceFormErrors.resourceLink && (
+            <div className="error">{resourceFormErrors.resourceLink}</div>
+          )}
+        </div>
+        <button type="submit" className="submit-button">Add Resource</button>
       </form>
+      {submitMessage && <div className="submit-message">{submitMessage}</div>}
     </div>
   );
 };

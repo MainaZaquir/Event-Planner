@@ -1,41 +1,65 @@
+// CollaborationForm.js
+
 import React, { useState } from 'react';
-import './CollaborationForm.css'; 
 
-const CollaborationForm = ({ onSubmit }) => {
-  const [collaborator, setCollaborator] = useState('');
-  const [collaboratorError, setCollaboratorError] = useState('');
+function CollaborationForm() {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: '',
+    });
+    const [formError, setFormError] = useState('');
 
-  const handleCollaboratorChange = (e) => {
-    setCollaborator(e.target.value);
-    setCollaboratorError(''); 
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!collaborator.trim()) {
-      setCollaboratorError('A collaborator name is required');
-      return;
-    }
-    onSubmit(collaborator);
-    setCollaborator('');
-  };
+        // Validate form fields
+        if (!formData.name || !formData.email || !formData.message) {
+            setFormError('Please fill in all fields.');
+            return;
+        }
 
-  return (
-    <div className="collaboration-form">
-      <h2>Collaboration Form</h2>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          name="collaborator" 
-          value={collaborator} 
-          onChange={handleCollaboratorChange} 
-          placeholder="Enter collaborator's name" 
-        />
-        {collaboratorError && <div className="error-message">{collaboratorError}</div>}
-        <button type="submit">Add Collaborator</button>
-      </form>
-    </div>
-  );
-};
+        // Handle form submission (e.g., send data to backend)
+        alert('Form submitted successfully!');
+    };
+
+    return (
+        <div>
+            <h2>Collaboration Form</h2>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="name">Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+
+                <label htmlFor="email">Email:</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+
+                <label htmlFor="message">Message:</label>
+                <textarea
+                    id="message"
+                    rows="4"
+                    placeholder="Write your message"
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                />
+
+                {formError && <p style={{ color: 'red' }}>{formError}</p>}
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    );
+}
 
 export default CollaborationForm;

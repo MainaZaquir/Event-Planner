@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './TaskManagementForm.css'; 
 
-const TaskManagementForm = ({ onTaskAdded }) => {
-  const [taskForm, setTaskForm] = useState({
+const TaskManagementForm = ({ onTaskAdded, taskToUpdate }) => {
+  const [taskForm, setTaskForm] = useState(taskToUpdate || {
     description: '',
     deadline: '',
     priority: ''
@@ -36,7 +36,8 @@ const TaskManagementForm = ({ onTaskAdded }) => {
   const handleSubmitTaskForm = (e) => {
     e.preventDefault();
     if (validateTaskForm()) {
-      axios.post('/api/tasks', taskForm)
+      const apiCall = taskToUpdate ? axios.put(`/api/tasks/${taskToUpdate.id}`, taskForm) : axios.post('/api/tasks', taskForm);
+      apiCall
         .then(response => {
           onTaskAdded(response.data);
           setTaskForm({
@@ -52,7 +53,7 @@ const TaskManagementForm = ({ onTaskAdded }) => {
 
   return (
     <div className="task-management-container"> 
-      <h2>Add a Task</h2>
+      <h2>{taskToUpdate ? 'Update Task' : 'Add a Task'}</h2>
       <form onSubmit={handleSubmitTaskForm} className="task-form"> 
         <input type="text" name="description" value={taskForm.description} onChange={handleTaskFormChange} />
         {taskFormErrors.description && <div className="error">{taskFormErrors.description}</div>} 
@@ -60,10 +61,11 @@ const TaskManagementForm = ({ onTaskAdded }) => {
         {taskFormErrors.deadline && <div className="error">{taskFormErrors.deadline}</div>} 
         <input type="text" name="priority" value={taskForm.priority} onChange={handleTaskFormChange} />
         {taskFormErrors.priority && <div className="error">{taskFormErrors.priority}</div>} 
-        <button type="submit">Add a Task</button>
+        <button type="submit">{taskToUpdate ? 'Update Task' : 'Add a Task'}</button>
       </form>
     </div>
   );
 };
 
 export default TaskManagementForm;
+x
