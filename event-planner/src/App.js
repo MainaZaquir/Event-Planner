@@ -15,10 +15,13 @@ import './components/LoginForm.css';
 import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
-
+import UserStoryPage from './components/UserStory';
+import Footer from './components/Footer';
+import {useNavigate } from 'react-router-dom';
 
 function App() {
     const [user , setUser]=useState({})
+    const navigate = useNavigate()
     useEffect(() => {
         const checkSession = () => {
           fetch("http://127.0.0.1:5555/check_session", {
@@ -40,7 +43,8 @@ function App() {
             setUser(userData)
           })
           .catch(error => {
-            console.error('Error checking session:', error);
+            // console.error('Error checking session:', error);
+            navigate("/login")
           });
         };
     checkSession();
@@ -65,8 +69,10 @@ function App() {
             <Route path='/event/:id' element={<CollaborationForm user={user} />}/>
             <Route path='/update_event/:id' element={<UpdateEvent />}/>
             <Route path='/task_assign' element={<TaskAssignment user={user} />}/>
+            <Route path='/user_stories' element={<UserStoryPage user={user} />}/>
         </Routes>
         </main>
+        {/* <Footer /> */}
         </div>
 
     );

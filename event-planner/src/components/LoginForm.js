@@ -24,32 +24,31 @@ function Login() {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);
-        try {
-            // setTimeout(async () => {
-            //     const response = await axios.post('http://127.0.0.1:5555/login', formData); 
-            //     console.log(response); 
-            // }, 1000);
-            fetch('http://127.0.0.1:5555/login',{
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-                  method: "POST",
-                  body:JSON.stringify(formData)
-            })
-            .then(r => r.json())
-            .then(data => {
-                localStorage.setItem('jwt',data[1].token)
-                navigate('/dashboard')
-            })
-        } catch (error) {
-            console.error('Login failed:', error);
-            setError('Invalid email or password. Please try again.');
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    try {
+        const response = await fetch('http://127.0.0.1:5555/login', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+        const data = await response.json();
+        if (response.ok) {
+            localStorage.setItem('jwt', data.token);
+            navigate('/dashboard');
+        } else {
+            alert("Wrong Credentials");
         }
-    };
+    } catch (error) {
+        console.error('Login failed:', error);
+        setError('Invalid email or password. Please try again.');
+    }
+};
+;
 
     return (
         <section>

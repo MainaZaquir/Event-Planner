@@ -18,7 +18,7 @@ const ResourceManagement = ({eventId}) => {
     // }
     setResourceName()
   };
-
+console.log(eventId)
   const validateResourceForm = () => {
     let errors = {};
     if (!name) {
@@ -49,13 +49,17 @@ const ResourceManagement = ({eventId}) => {
         body:JSON.stringify({
           name,
           quantity,
-          event_id
+          event_id:eventId
 
         })
+        
       })
+     
         
         .catch(error => console.error(error));
     }
+    setResourceName('')
+    setQuality('')
   };
 
   return (

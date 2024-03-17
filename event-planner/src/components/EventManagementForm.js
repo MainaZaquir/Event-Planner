@@ -78,15 +78,15 @@ const EventManagementForm = ({ onSubmit }) => {
     <div className="event-form">
       <h4>Add a New Event</h4>
       <form onSubmit={handleSubmitEventForm}>
-        <input type="text" name="title" placeholder="Title" value={eventForm.title} onChange={handleEventFormChange} />
+        <input type="text" name="title" placeholder="Title" value={eventForm.title} onChange={handleEventFormChange} /><br />
         {eventFormErrors.title && <div className="error-message">{eventFormErrors.title}</div>}
-        <input type="date" name="date" value={eventForm.date} onChange={handleEventFormChange} />
+        <input type="date" name="date" value={eventForm.date} onChange={handleEventFormChange} /><br />
         {eventFormErrors.date && <div className="error-message">{eventFormErrors.date}</div>}
-        <input type="time" name="time" value={eventForm.time} onChange={handleEventFormChange} />
+        <input type="time" name="time" value={eventForm.time} onChange={handleEventFormChange} /><br />
         {eventFormErrors.time && <div className="error-message">{eventFormErrors.time}</div>}
-        <input type="text" name="location" placeholder="Location" value={eventForm.location} onChange={handleEventFormChange} />
+        <input type="text" name="location" placeholder="Location" value={eventForm.location} onChange={handleEventFormChange} /><br />
         {eventFormErrors.location && <div className="error-message">{eventFormErrors.location}</div>}
-        <textarea name="description" placeholder="Description" value={eventForm.description} onChange={handleEventFormChange} />
+        <textarea name="description" placeholder="Description" value={eventForm.description} onChange={handleEventFormChange} /><br />
         {eventFormErrors.description && <div className="error-message">{eventFormErrors.description}</div>}
         <input type="text" name="category" placeholder="Category" value={eventForm.category} onChange={handleEventFormChange} />
         {/* <input type="text" name="organizer_id" placeholder="Organizer_id" value={eventForm.organizer_id} onChange={handleEventFormChange} /> */}

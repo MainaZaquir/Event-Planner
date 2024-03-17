@@ -3,16 +3,14 @@ import React, { useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import './TaskManagementForm.css'; 
 
-const TaskManagementForm = ({ onTaskAdded }) => {
-  const {id} = useParams()
+const TaskManagementForm = ({ eventId,onTaskAdded }) => {
+  // const {id} = useParams()
   const [taskForm, setTaskForm] = useState({
     title:'',
     description: '',
     deadline: '',
-    // priority: '',
-    user_id: 0,
     completed:"False",
-    event_id:id,
+    event_id:eventId,
     // organizer_id:0
 
   });
@@ -63,8 +61,6 @@ console.log(taskForm)
       title:'',
       description: '',
       deadline: '',
-      
-      user_id: "",
       completed:"",
       event_id:"",
       
@@ -82,7 +78,7 @@ console.log(taskForm)
         <input type="text" name="description" value={taskForm.description} placeholder='description' onChange={handleTaskFormChange} />
         {taskFormErrors.description && <div className="error">{taskFormErrors.description}</div>} 
         <input type="text" name="completed" value={taskForm.completed} placeholder='True or false' onChange={handleTaskFormChange} />
-        <input type="text" name="user_id" value={taskForm.user_id} placeholder='user_id' onChange={handleTaskFormChange} />
+        {/* <input type="text" name="user_id" value={taskForm.user_id} placeholder='user_id' onChange={handleTaskFormChange} /> */}
         {/* <input type="text" name="organizer_id" value={taskForm.organizer_id} placeholder='orgaizer_id' onChange={handleTaskFormChange} /> */}
 
         {/* <input type="text" name="event_id" value={taskForm.event_id} placeholder='event_id' onChange={handleTaskFormChange} /> */}

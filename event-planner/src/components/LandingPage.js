@@ -1,4 +1,5 @@
 import './LandingPage.css';
+import UserStoryPage from './UserStory';
 
 
 function LandingPage() {
@@ -48,6 +49,7 @@ function LandingPage() {
             <footer>
                 <p>© 2024 Event Planning Hub</p>
             </footer>
+            {/* <UserStoryPage /> */}
         </div>
     );
 }

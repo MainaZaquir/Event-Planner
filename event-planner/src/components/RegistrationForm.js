@@ -34,10 +34,11 @@ const RegistrationForm = () => {
           password
         })
       });
-
+      const data = await response.json();
       if (response.ok) {
         alert('Registration was successful');
-        navigate('/login');
+        localStorage.setItem('jwt', data[1].token);
+        navigate('/dashboard');
       } else {
         alert('Registration has failed');
       }
