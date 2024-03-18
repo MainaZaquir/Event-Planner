@@ -9,6 +9,7 @@ import ResourceManagement from './components/ResourceManagement';
 import CollaborationForm from './components/CollaborationForm';
 import BudgetManagementForm from './components/BudgetManagementForm';
 import LandingPage from './components/LandingPage';
+import Expense from './components/Expenses';
 import './App.css';
 import './components/LandingPage.css'
 import './components/LoginForm.css';
@@ -63,6 +64,8 @@ function App() {
             <Route path="/budget" element={<BudgetManagementForm user={user} />} />
             <Route path='/event/:id' element={<CollaborationForm user={user} />}/>
             <Route path='/update_event/:id' element={<UpdateEvent />}/>
+            <Route path='/expenses' element={<Expense user={user} />} />
+
         </Routes>
         </main>
         </div>
