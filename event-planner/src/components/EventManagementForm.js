@@ -119,6 +119,7 @@ const EventManagementForm = () => {
   };
 
   return (
+    <>
     <div className="event-form max-w-sm mx-auto">
       <h4 className="text-lg font-semibold mb-4">Add a New Event</h4>
       <form onSubmit={handleSubmitEventForm} className="space-y-4">
@@ -135,7 +136,8 @@ const EventManagementForm = () => {
         <input type="text" name="category" placeholder="Category" value={eventForm.category} onChange={handleEventFormChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" />
         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Event</button>
       </form>
-    </div>
+    </div><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 

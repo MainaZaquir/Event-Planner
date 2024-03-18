@@ -51,7 +51,9 @@ const CollaborationForm = ({ user }) => {
   const handleUpdate = (id) => {
     navigate(`/update_event/${id}`);
   };
-
+const handleUpdateTask = (id) =>{
+  navigate(`/update_task/${id}`)
+}
   const handleTaskAdded = (newTask) => {
     setTasks(prevTasks => [...prevTasks, newTask]);
     setFilteredTasks(prevTasks => [...prevTasks, newTask]);
@@ -157,6 +159,7 @@ const CollaborationForm = ({ user }) => {
               <h3 className="text-lg font-bold text-blue-800 mb-1">{task.title}</h3>
               <p className="text-sm text-gray-600 mb-2">Deadline: {task.deadline}</p>
               <p className="text-sm text-gray-700">Completed: {task.completed}</p>
+              <button onClick={() => handleUpdateTask(task.id)}>Update</button>
               <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
             </div>
            

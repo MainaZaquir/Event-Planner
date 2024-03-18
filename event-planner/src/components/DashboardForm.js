@@ -74,13 +74,16 @@ const Dashboard = () => {
 
  }
   return (
+    <>
     <div className='parent'>
      
   <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
   <h2 className="text-2xl font-semibold mb-2">Upcoming Events</h2>
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     {events.map(event => (
-      <div onClick={() => handleClick(event.id)} key={event.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div onClick={() => handleClick(event.id)} key={event.id} className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:bg-gray-100 hover:shadow-lg"
+
+      >
         <div className="p-4">
           <h3  className="text-lg font-bold text-blue-800 mb-1">{event.title}</h3>
           <p className="text-sm text-gray-600 mb-1">{event.date} at {event.time}</p>
@@ -136,7 +139,8 @@ const Dashboard = () => {
 
       {/* <ResourceManagementForm /> */}
       {/* <TaskManagementForm onTaskAdded={handleTaskAdded} /> */}
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 

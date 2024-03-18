@@ -54,7 +54,9 @@ const TaskAssignment = ({user}) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
+        alert('Assigned Task successfuly')
         return response.json();
+
       })
       .then((data) => {
         console.log(data.message);
@@ -67,6 +69,7 @@ const TaskAssignment = ({user}) => {
   
 
   return (
+    <>
     <div className="container mx-auto p-4">
       <h3 className="text-2xl font-bold ">Task Assignment</h3>
       <form onSubmit={handleSubmit} className="mb-4">
@@ -127,7 +130,8 @@ const TaskAssignment = ({user}) => {
           </li>
         ))}
       </ul> */}
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 

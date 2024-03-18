@@ -132,7 +132,7 @@ const BudgetManagementForm = ({ budget,user }) => {
   };
 
   return (
-    <div className="budget-management-container"><br /> <br /> <br /> <br />
+    <>    <div className="budget-management-container"><br /> <br /> <br /> <br />
       <h4>Budget Management and Expense Tracking</h4>
       <h5 className="card-title">Add an Budget</h5>
       <div>
@@ -180,7 +180,8 @@ const BudgetManagementForm = ({ budget,user }) => {
           </table>
         </div>
       </div>
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 

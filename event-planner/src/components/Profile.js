@@ -38,6 +38,7 @@ function Profile({ user }) {
   }
 
   return (
+    <>
     <div className="flex justify-center">
       <div className="max-w-md mx-4 my-8 bg-white shadow-md rounded-md overflow-hidden">
         <div className="p-4">
@@ -57,7 +58,8 @@ function Profile({ user }) {
           </ul>
         </div>
       </div>
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 }
 

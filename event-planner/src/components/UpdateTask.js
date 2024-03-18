@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const TaskManagementForm = ({ eventId, onTaskAdded }) => {
+const UpdateTask = ({ eventId}) => {
   const [taskForm, setTaskForm] = useState({
     title: '',
     // description: '',
@@ -12,7 +12,7 @@ const TaskManagementForm = ({ eventId, onTaskAdded }) => {
 
   const [taskFormErrors, setTaskFormErrors] = useState({});
   const navigate = useNavigate();
-
+  const { id } = useParams();
   const handleTaskFormChange = (e) => {
     const { name, value } = e.target;
     setTaskForm(prevForm => ({
@@ -26,9 +26,9 @@ const TaskManagementForm = ({ eventId, onTaskAdded }) => {
     if (!taskForm.title.trim()) {
       errors.title = 'A title is required for the task';
     }
-    if (!taskForm.completed.trim()) {
-      errors.completed = 'A complete status is required for the task';
-    }
+    // if (!taskForm.completed.trim()) {
+    //   errors.completed = 'A complete status is required for the task';
+    // }
     if (!taskForm.deadline) {
       errors.deadline = 'A deadline is required for the task';
     }
@@ -39,38 +39,29 @@ const TaskManagementForm = ({ eventId, onTaskAdded }) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmitTaskForm = (e) => {
+  const handleSubmitTaskForm = async (e) => {
     e.preventDefault();
-    if (validateTaskForm()) {
-      fetch('http://127.0.0.1:5555/task', {
+    try {
+      const response = await fetch(`http://127.0.0.1:5555/task_update/${id}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify(taskForm)
-      })
-      .then(response => {
-        if (response.ok) {
-          alert('Task added successfully');
-          navigate(`/event/${eventId}`);
-        } else {
-          alert('Failed to add task');
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert('An error occurred while adding task');
       });
+
+      if (response.ok) {
+        alert('Event updated successfully');
+        navigate('/dashboard');
+      } else {
+        alert('Failed to update event');
+      }
+    } catch (error) {
+      console.error('Error updating event:', error);
+      alert('An error occurred while updating event');
     }
-    setTaskForm({
-      title: '',
-      // description: '',
-      deadline: '',
-      completed: '',
-      event_id: eventId,
-    });
   };
 
   return (
@@ -81,12 +72,12 @@ const TaskManagementForm = ({ eventId, onTaskAdded }) => {
         {taskFormErrors.title && <div className="text-red-500">{taskFormErrors.title}</div>}
         <input type="date" name="deadline" value={taskForm.deadline} placeholder="Deadline" onChange={handleTaskFormChange} className="mb-4 p-2 border border-gray-300 rounded" /><br />
         {taskFormErrors.deadline && <div className="text-red-500">{taskFormErrors.deadline}</div>}
-        <input name="complete" value={taskForm.completed} placeholder="Completed True or False" onChange={handleTaskFormChange} className="mb-4 p-2 border border-gray-300 rounded" /><br />
-        {taskFormErrors.completed && <div className="text-red-500">{taskFormErrors.completed}</div>}
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add a Task</button>
+        {/* <input name="complete" value={taskForm.completed} placeholder="Completed True or False" onChange={handleTaskFormChange} className="mb-4 p-2 border border-gray-300 rounded" /><br /> */}
+        {/* {taskFormErrors.completed && <div className="text-red-500">{taskFormErrors.completed}</div>} */}
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Update a Task</button>
       </form>
     </div>
   );
 };
 
-export default TaskManagementForm;
+export default UpdateTask;

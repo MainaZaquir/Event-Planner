@@ -15,8 +15,15 @@ import './components/LoginForm.css';
 import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
+
 import UserStoryPage from './components/UserStoryPage'; 
 import Footer from './components/Footer'; 
+
+import UpdateTask from './components/UpdateTask';
+
+
+
+
 import {useNavigate } from 'react-router-dom';
 import Profile from './components/Profile';
 
@@ -68,6 +75,7 @@ function App() {
             <Route path="/budget" element={<BudgetManagementForm user={user} />} />
             <Route path='/event/:id' element={<CollaborationForm user={user} />}/>
             <Route path='/update_event/:id' element={<UpdateEvent />}/>
+            <Route path='/update_task/:id' element={<UpdateTask />}/>
             <Route path='/task_assign' element={<TaskAssignment user={user} />}/>
             <Route path='/user_stories' element={<UserStoryPage user={user} />}/>
             <Route path='/users' element={<Profile user={user} />}/>
