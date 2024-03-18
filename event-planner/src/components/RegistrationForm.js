@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import './RegistrationForm.css'; 
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
-  const [first_name, setfirstName] = useState('');
-  const [last_name, setlastname] = useState('');
-  const [email, setCompanyEmail] = useState('');
-  const [password, setNewPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
@@ -27,11 +25,11 @@ const RegistrationForm = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          first_name,
-          last_name,
-          username,
-          email,
-          password
+          first_name: firstName,
+          last_name: lastName,
+          username: username,
+          email: email,
+          password: password
         })
       });
       const data = await response.json();
@@ -49,75 +47,87 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="container"> 
-      <div className="card">
-        <h1>Have an event coming up? Sign up with us for your ticket management.</h1>
-        <form className="sign-up-form" onSubmit={handleSubmit}> 
-          <label htmlFor="first name">First Name:</label><br />
-          <input
-            type="text"
-            id="First Name"
-            name="First Name"
-            value={first_name}
-            onChange={(e) => setfirstName(e.target.value)}
-            required
-            className="form-input" 
-          /><br />
-            <label htmlFor="last name">Last Name:</label><br />
-          <input
-            type="text"
-            id="last Name"
-            name="last Name"
-            value={last_name}
-            onChange={(e) => setlastname(e.target.value)}
-            required
-            className="form-input" 
-          /><br />
-           <label htmlFor="last name">Username:</label><br />
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className="form-input" 
-          /><br />
-          <label htmlFor="user email">User Email:</label><br />
-          <input
-            type="email"
-            id="user email"
-            name="user email"
-            value={email}
-            onChange={(e) => setCompanyEmail(e.target.value)}
-            required
-            className="form-input"
-          /><br />
-          <label htmlFor="new_password">Enter New Password:</label><br />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            minLength="8"
-            value={password}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-            className="form-input"
-          /><br />
-          <label htmlFor="confirm_password">Confirm Password:</label><br />
-          <input
-            type="password"
-            id="confirm_password"
-            name="confirm_password"
-            minLength="8"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            className="form-input" 
-          /><br />
-          <button type="submit" className="form-button">Sign Up</button> 
+    <div className="bg-[#41bdc1] min-h-screen flex justify-center items-center">
+      <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold mb-6 text-center">Sign Up</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="firstName" className="block text-gray-700">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+              className="form-input border border-gray-300"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="lastName" className="block text-gray-700">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+              className="form-input border border-gray-300"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="username" className="block text-gray-700">Username:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className="form-input border border-gray-300"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-gray-700">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="form-input border border-gray-300"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-gray-700">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              minLength="8"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="form-input border border-gray-300"
+            />
+          </div>
+          <div className="mb-6">
+            <label htmlFor="confirmPassword" className="block text-gray-700">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              minLength="8"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              className="form-input border border-gray-300"
+            />
+          </div>
+          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Sign Up</button>
         </form>
-        <p className="register">Already have an account? <Link to="/login">Log in.</Link></p>
+        <p className="text-center mt-4">Already have an account? <Link to="/login" className="text-blue-500 hover:text-blue-700">Log in</Link></p>
       </div>
     </div>
   );

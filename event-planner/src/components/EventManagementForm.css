@@ -42,7 +42,7 @@
     margin-bottom: 5px;
   }
   
-  /* Mobile responsiveness */
+
   @media (max-width: 600px) {
     .event-form input[type="text"],
     .event-form input[type="date"],

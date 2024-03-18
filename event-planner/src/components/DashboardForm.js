@@ -3,7 +3,7 @@ import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ResourceManagementForm from './ResourceManagement'; 
 import TaskManagementForm from './TaskManagementForm';
-import "./DashboardForm.css" 
+// import "./DashboardForm.css" 
 import { useParams,useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
-import './LoginForm.css'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 
 function Login() {
-    const navigate=useNavigate()
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -24,71 +23,74 @@ function Login() {
         setShowPassword(!showPassword);
     };
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    try {
-        const response = await fetch('http://127.0.0.1:5555/login', {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
-        const data = await response.json();
-        if (response.ok) {
-            localStorage.setItem('jwt', data.token);
-            navigate('/dashboard');
-        } else {
-            alert("Wrong Credentials");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError(null);
+        try {
+            const response = await axios.post('http://127.0.0.1:5555/login', formData);
+            if (response.status === 200) {
+                localStorage.setItem('jwt', response.data.token);
+                navigate('/dashboard');
+            } else {
+                setError('Wrong Credentials');
+            }
+        } catch (error) {
+            setError('Invalid email or password. Please try again.');
         }
-    } catch (error) {
-        // console.error('Login failed:', error);
-        setError('Invalid email or password. Please try again.');
-    }
-};
-;
+    };
 
     return (
-        <section>
-            <div className="formbox">
-                <div className="form-value">
-                    <form onSubmit={handleSubmit}>
-                        <h2>Login Form</h2>
-                        <div className="inputbox">
-                            <ion-icon name={showPassword ? "eye-outline" : "eye-off-outline"}></ion-icon>
-                            <input type="username" name="username" placeholder="Enter Username" value={formData.username} onChange={handleChange} required />
-                        </div>
-                        <div className="inputbox">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                            <input 
-                                type={showPassword ? 'text' : 'password'} 
-                                name="password" 
-                                placeholder="Enter password" 
-                                value={formData.password} 
-                                onChange={handleChange} 
-                                required 
-                            />
-                        </div>
-                        {error && <div className="error">{error}</div>}
-                        <div className="forget">
-                            <label>
-                                <input 
-                                    type="checkbox" 
-                                    checked={showPassword} 
-                                    onChange={handleShowPassword} 
-                                />
-                                Show password 
-                                {/* <a href="#">Forgot my password</a> */}
-                            </label>
-                        </div>
-                        <button type="submit">Login</button>
-                        <div className="register">
-                            <p>No account <a href="register">Register here</a></p>
-                        </div>
-                    </form>
-                </div>
+        <section className="h-screen flex justify-center items-center">
+            <div className="max-w-md w-full p-8 bg-white rounded shadow-lg">
+                <h2 className="text-3xl text-center font-semibold mb-8">Login Form</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label htmlFor="username" className="sr-only">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter Username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password" className="sr-only">Password</label>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            name="password"
+                            placeholder="Enter password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                            required
+                        />
+                    </div>
+                    {error && <div className="text-red-500 mb-4">{error}</div>}
+                    <div className="mb-4 flex items-center">
+                        <input
+                            type="checkbox"
+                            id="showPassword"
+                            checked={showPassword}
+                            onChange={handleShowPassword}
+                            className="mr-2"
+                        />
+                        <label htmlFor="showPassword">Show password</label>
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                    >
+                        Login
+                    </button>
+                    <div className="text-center mt-4">
+                        <p>No account <Link to="/register" className="text-blue-500 hover:text-blue-700">Register here</Link></p>
+                    </div>
+                </form>
             </div>
         </section>
     );
