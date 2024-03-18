@@ -29,21 +29,43 @@ const ResourceManagement = ({ eventId }) => {
 
   const handleSubmitResourceForm = (e) => {
     e.preventDefault();
+    
     if (validateResourceForm()) {
-      axios.post('http://127.0.0.1:5555/resource', {
-        name,
-        quantity,
-        event_id: eventId
-      })
-      .then(response => {
-        console.log(response);
-        // Do something with the response if needed
-      })
-      .catch(error => console.error(error));
+      // Get JWT token from localStorage
+      const token = localStorage.getItem('jwt');
+  
+      // Check if token exists
+      if (token) {
+        // Include the token in the Authorization header
+        const headers = {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        };
+  
+        // Send POST request with Axios
+        axios.post('http://127.0.0.1:5555/resource', {
+          name,
+          quantity,
+          event_id: eventId
+        }, { headers }) // Include headers in the request
+        .then(response => {
+          console.log(response);
+          // Do something with the response if needed
+          alert("Added successfuly")
+        })
+        .catch(error => console.error(error));
+      } else {
+        // Handle case when token is not available
+        console.error('JWT token not found');
+      }
     }
+  
+    // Reset form fields
     setResourceName('');
     setQuantity('');
   };
+  
 
   return (
     <div className="resource-form">

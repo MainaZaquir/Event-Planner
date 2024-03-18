@@ -21,7 +21,7 @@ const BudgetManagementForm = ({ budget,user }) => {
         body: JSON.stringify(formData)
       });
       if (response.ok) {
-        console.log('Expense added successfully');
+        alert('Expense added successfully');
         // You may want to update the UI or refetch data after adding expense
       } else {
         const errorData = await response.json();

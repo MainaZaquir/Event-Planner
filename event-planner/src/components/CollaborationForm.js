@@ -62,6 +62,7 @@ const CollaborationForm = ({ user }) => {
       await axios.delete(`http://127.0.0.1:5555/task_update/${taskId}`);
       const updatedTasks = tasks.filter(task => task.id !== taskId);
       setTasks(updatedTasks);
+      alert("Task Update deleted successfuly")
     } catch (error) {
       console.error('Error deleting task:', error);
     }
@@ -72,6 +73,7 @@ const CollaborationForm = ({ user }) => {
       await axios.delete(`http://127.0.0.1:5555/resource/${taskId}`);
       const updatedResource = resource.filter(task => task.id !== taskId);
       setResource(updatedResource);
+      alert("Resource deleted successfuly")
     } catch (error) {
       console.error('Error deleting resource:', error);
     }
