@@ -4,6 +4,7 @@ import axios from 'axios';
 const TaskAssignment = ({user}) => {
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
+  const [taskFormErrors, setTaskFormErrors] = useState({});
   const [assignedTask, setAssignedTask] = useState({
     task_id: '',
     user_id: '',
@@ -37,34 +38,47 @@ const TaskAssignment = ({user}) => {
     const { name, value } = e.target;
     setAssignedTask((prev) => ({ ...prev, [name]: value }));
   };
-
+  const validateTaskForm = () => {
+    let errors = {};
+    if (!assignedTask.task_id) {
+      errors.task_id = 'A Task is required for the task assignment';
+    }
+    if (!assignedTask.user_id) {
+      errors.user_id = 'A user  is required for the task assignment';
+    }
+  
+    setTaskFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (validateTaskForm()){
+      fetch('http://127.0.0.1:5555/task_management', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        },
+        body: JSON.stringify(assignedTask)
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          alert('Assigned Task successfuly')
+          return response.json();
   
-    fetch('http://127.0.0.1:5555/task_management', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      },
-      body: JSON.stringify(assignedTask)
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        alert('Assigned Task successfuly')
-        return response.json();
+        })
+        .then((data) => {
+          console.log(data.message);
+          fetchTasks(); 
+        })
+        .catch((error) => {
+          console.error('Error assigning task:', error);
+        });
+    }
 
-      })
-      .then((data) => {
-        console.log(data.message);
-        fetchTasks(); 
-      })
-      .catch((error) => {
-        console.error('Error assigning task:', error);
-      });
   };
   
 
