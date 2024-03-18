@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as  Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import DashboardForm from './components/DashboardForm';
@@ -15,12 +15,8 @@ import './components/LoginForm.css';
 import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
-
-import UserStoryPage from './components/UserStoryPage'; // Use the correct component name
-import Footer from './components/Footer'; // Import the Footer component
-
-// import UserStoryPage from './components/UserStoryPage';
-
+import UserStoryPage from './components/UserStoryPage'; 
+import Footer from './components/Footer'; 
 import {useNavigate } from 'react-router-dom';
 import Profile from './components/Profile';
 
@@ -54,7 +50,7 @@ function App() {
         };
     checkSession();
     
-      }, []);
+      }, [navigate]);
     return (
         <div>
         <Navbar />
@@ -77,7 +73,7 @@ function App() {
             <Route path='/users' element={<Profile user={user} />}/>
         </Routes>
         </main>
-        <Footer /> {/* Use the Footer component */}
+        <Footer />
         </div>
     );
 }
