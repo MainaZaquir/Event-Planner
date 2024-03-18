@@ -39,45 +39,7 @@ const EventManagementForm = () => {
     setEventFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Validation
-    if (!validateEventForm()) {
-      return;
-    }
-  
-    try {
-      const response = await fetch('http://127.0.0.1:5555/events', {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-        },
-        body: JSON.stringify(eventForm)
-      });
-  
-      if (response.ok) {
-        const data = await response.json();
-        alert('Event added successfully');
-        // Reset form after successful submission
-        setEventForm({
-          title: '',
-          date: '',
-          time: '',
-          location: '',
-          description: '',
-          category: ''
-        });
-      } else {
-        alert('Failed to add event');
-      }
-    } catch (error) {
-      console.error('Error adding event:', error);
-      alert('An error occurred while adding event');
-    }
-  }
+
   const handleSubmitEventForm = async (e) => {
     e.preventDefault();
     
