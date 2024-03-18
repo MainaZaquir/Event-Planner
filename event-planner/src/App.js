@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {  Route, Routes } from 'react-router-dom';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import DashboardForm from './components/DashboardForm';
