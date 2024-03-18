@@ -15,8 +15,12 @@ import './components/LoginForm.css';
 import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
+
 import UserStoryPage from './components/UserStoryPage'; // Use the correct component name
 import Footer from './components/Footer'; // Import the Footer component
+
+import UserStoryPage from './components/UserStoryPage';
+
 import {useNavigate } from 'react-router-dom';
 import Profile from './components/Profile';
 

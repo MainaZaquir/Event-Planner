@@ -23,7 +23,7 @@ const TaskManagementForm = ({ eventId,onTaskAdded }) => {
       [name]: value
     }));
   };
-console.log(taskForm)
+// console.log(taskForm)
   const validateTaskForm = () => {
     let errors = {};
     if (!taskForm.description.trim()) {
