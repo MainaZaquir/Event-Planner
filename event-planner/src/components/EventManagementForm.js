@@ -39,7 +39,45 @@ const EventManagementForm = () => {
     setEventFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
-
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validation
+    if (!validateEventForm()) {
+      return;
+    }
+  
+    try {
+      const response = await fetch('http://127.0.0.1:5555/events', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        },
+        body: JSON.stringify(eventForm)
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        alert('Event added successfully');
+        // Reset form after successful submission
+        setEventForm({
+          title: '',
+          date: '',
+          time: '',
+          location: '',
+          description: '',
+          category: ''
+        });
+      } else {
+        alert('Failed to add event');
+      }
+    } catch (error) {
+      console.error('Error adding event:', error);
+      alert('An error occurred while adding event');
+    }
+  }
   const handleSubmitEventForm = async (e) => {
     e.preventDefault();
     
@@ -98,7 +136,7 @@ const EventManagementForm = () => {
         <input type="text" name="category" placeholder="Category" value={eventForm.category} onChange={handleEventFormChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" />
         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Event</button>
       </form>
-    </div><br /><br /><br /><br /><br /><br />
+    </div><br /><br /><br /><br /><br />
     </>
   );
 };
