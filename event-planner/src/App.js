@@ -15,7 +15,7 @@ import './components/LoginForm.css';
 import Navbar from './components/NavBar';
 import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
-
+import Expense from './components/Expenses';
 import UserStoryPage from './components/UserStoryPage'; 
 import Footer from './components/Footer'; 
 
@@ -81,6 +81,8 @@ function App() {
             <Route path='/task_assign' element={<TaskAssignment user={user} />}/>
             <Route path='/user_stories' element={<UserStoryPage user={user} />}/>
             <Route path='/users' element={<Profile user={user} />}/>
+            <Route path='/expenses' element={<Expense user={user} />} />
+
         </Routes>
         </main>
         <Footer />
