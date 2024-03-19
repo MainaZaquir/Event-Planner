@@ -42,7 +42,9 @@ function App() {
             if (response.ok) {
               return response.json();
             } else {
+              // navigate("/login")
               throw new Error('Failed to check session');
+              
             }
           })
           .then(userData => {
@@ -52,7 +54,7 @@ function App() {
           })
           .catch(error => {
             // console.error('Error checking session:', error);
-            navigate("/login")
+            
           });
         };
     checkSession();
