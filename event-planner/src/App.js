@@ -32,7 +32,7 @@ function App() {
     const navigate = useNavigate()
     useEffect(() => {
         const checkSession = () => {
-          fetch("http://127.0.0.1:5555/check_session", {
+          fetch("https://event-planner-app-backend.onrender.com/check_session", {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt')}`

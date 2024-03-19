@@ -16,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsResponse = await axios.get('https://event-planner-app-backend.onrender.com/events');
+        const eventsResponse = await axios.get('http://127.0.0.1:5555/events');
         setEvents(eventsResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -69,19 +69,6 @@ const Dashboard = () => {
     navigate(`/event/${id}`);
   };
 
-  const handleDeleteTask = (taskId) => {
-    const updatedTasks = tasks.filter(task => task.id !== taskId);
-    setTasks(updatedTasks);
-    setFilteredTasks(updatedTasks);
-
-    axios.delete(`http://127.0.0.1:5555/tasks/${taskId}`)
-      .then(response => {
-        console.log('Task deleted successfully');
-      })
-      .catch(error => {
-        console.error('Error deleting task:', error);
-      });
-  };
 
   return (
     <>

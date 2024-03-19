@@ -11,7 +11,7 @@ const BudgetManagementForm = ({ budget,user }) => {
   const [eventOptions, setEventOptions] = useState([]);
   const onSubmit = async (formData) => {
     try {
-      const response = await fetch('https://event-planner-app-backend.onrender.com/budgets', {
+      const response = await fetch('http://127.0.0.1:5555/budgets', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -54,7 +54,7 @@ const BudgetManagementForm = ({ budget,user }) => {
 
   const fetchBudgetData = async () => {
     try {
-      const response = await fetch('https://event-planner-app-backend.onrender.com/budgets', {
+      const response = await fetch('http://127.0.0.1:5555/budgets', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const BudgetManagementForm = ({ budget,user }) => {
 
   const fetchEventOptions = async () => {
     try {
-      const response = await fetch('https://event-planner-app-backend.onrender.com/events', {
+      const response = await fetch('http://127.0.0.1:5555/events', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const BudgetManagementForm = ({ budget,user }) => {
 
   const handleDeleteExpense = async (id) => {
     try {
-      const response = await fetch(`https://event-planner-app-backend.onrender.com/budget/${id}`, {
+      const response = await fetch(`http://127.0.0.1:5555/budget/${id}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

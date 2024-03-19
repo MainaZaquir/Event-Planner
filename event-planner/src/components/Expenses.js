@@ -19,7 +19,7 @@ const Expense = ({ user }) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://event-planner-app-backend.onrender.com/expenses', expenseForm, {
+      const response = await axios.post('http://127.0.0.1:5555/expenses', expenseForm, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         }
@@ -49,7 +49,7 @@ const Expense = ({ user }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsResponse = await axios.get('https://event-planner-app-backend.onrender.com/events');
+        const eventsResponse = await axios.get('http://127.0.0.1:5555/events');
         setEvents(eventsResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -85,7 +85,7 @@ const Expense = ({ user }) => {
             onChange={(e) => setExpenseForm({ ...expenseForm, amount: parseFloat(e.target.value) })}
             required
           />
-        </div>
+        </div><br />
         <div>
           <select
             id="event_id"
@@ -95,13 +95,13 @@ const Expense = ({ user }) => {
             value={expenseForm.event_id}
             onChange={(e) => setExpenseForm({ ...expenseForm, event_id: parseFloat(e.target.value) })}
           >
-            <option value="">Select Event</option>
+            <option value="">Select Event</option><br /><br />
             {events.map(event => (
               // Filter events based on organizer_id
               event.organizer_id === user.user_id && <option key={event.id} value={event.id}>{event.title}</option>
             ))}
           </select>
-        </div>
+        </div><br /><br />
         <button type="submit" className="btn btn-primary">Add Expense</button>
       </form>
     </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

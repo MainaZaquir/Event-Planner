@@ -44,7 +44,7 @@ const ResourceManagement = ({ eventId }) => {
         };
   
         // Send POST request with Axios
-        axios.post('https://event-planner-app-backend.onrender.com/resource', {
+        axios.post('http://127.0.0.1:5555/resource', {
           name,
           quantity,
           event_id: eventId

@@ -6,7 +6,7 @@ function Profile({ user }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5555/users')
+    fetch('https://event-planner-app-backend.onrender.com/users')
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
