@@ -26,7 +26,7 @@ const UpdateEvent = () => {
   const handleSubmitEventForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://127.0.0.1:5555/events/${id}`, {
+      const response = await fetch(`https://event-planner-app-backend.onrender.com/events/${id}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

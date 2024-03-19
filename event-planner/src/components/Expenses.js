@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const Expense = ({ user }) => {
   const [expenseForm, setExpenseForm] = useState({
     description: '',
     amount: 0,
-    event_id: null // Initialize event_id state
+    event_id: null // Initialize event_id state to null
   });
+  const navigate =useNavigate()
 
   const [events, setEvents] = useState([]);
   console.log(expenseForm);
@@ -16,37 +19,37 @@ const Expense = ({ user }) => {
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://127.0.0.1:5555/expenses`, {
-        method: 'POST',
+      const response = await axios.post('https://event-planner-app-backend.onrender.com/expenses', expenseForm, {
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-        },
-        body: JSON.stringify(expenseForm) // Just pass expenseForm directly
+        }
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to add expense');
+      if (response.status === 201) {
+        // Clear form fields after successful submission
+        setExpenseForm({
+          description: '',
+          amount: 0,
+          event_id: null // Change to null to match the initial state
+        });
+
+        alert('Expense added successfully');
+        navigate('/expenses')
+
+      } else {
+        console.error('Failed to add expense');
+        alert('Expense Not addedsuccessfully');
       }
-
-      // Clear form fields after successful submission
-      setExpenseForm({
-        description: '',
-        amount: 0,
-        event_id: null // Change to null to match the initial state
-      });
-
-      console.log('Expense added successfully');
     } catch (error) {
       console.error('Error adding expense:', error.message);
+      alert('Expense Not added successfully');
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsResponse = await axios.get('http://127.0.0.1:5555/events');
+        const eventsResponse = await axios.get('https://event-planner-app-backend.onrender.com/events');
         setEvents(eventsResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -57,6 +60,7 @@ const Expense = ({ user }) => {
   }, []);
 
   return (
+    <>
     <div className="container">
       <h2>Add New Expense</h2>
       <form onSubmit={handleSubmit}>
@@ -86,9 +90,10 @@ const Expense = ({ user }) => {
           <select
             id="event_id"
             name="event_id"
+            type="number"
             className="border border-gray-300 rounded px-3 py-1"
             value={expenseForm.event_id}
-            onChange={(e) => setExpenseForm({ ...expenseForm, event_id: e.target.value })}
+            onChange={(e) => setExpenseForm({ ...expenseForm, event_id: parseFloat(e.target.value) })}
           >
             <option value="">Select Event</option>
             {events.map(event => (
@@ -99,7 +104,8 @@ const Expense = ({ user }) => {
         </div>
         <button type="submit" className="btn btn-primary">Add Expense</button>
       </form>
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 

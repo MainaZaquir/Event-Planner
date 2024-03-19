@@ -27,7 +27,7 @@ function Login() {
         e.preventDefault();
         setError(null);
         try {
-            const response = await axios.post('http://127.0.0.1:5555/login', formData);
+            const response = await axios.post('https://event-planner-app-backend.onrender.com/login', formData);
             if (response.status === 200) {
                 localStorage.setItem('jwt', response.data.token);
                 navigate('/dashboard');

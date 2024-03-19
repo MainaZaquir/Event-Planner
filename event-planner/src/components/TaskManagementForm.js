@@ -42,7 +42,7 @@ const TaskManagementForm = ({ eventId, onTaskAdded }) => {
   const handleSubmitTaskForm = (e) => {
     e.preventDefault();
     if (validateTaskForm()) {
-      fetch('http://127.0.0.1:5555/task', {
+      fetch('https://event-planner-app-backend.onrender.com/task', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -74,6 +74,7 @@ const TaskManagementForm = ({ eventId, onTaskAdded }) => {
   };
 
   return (
+    <>
     <div className="task-management-container">
       <h4 className="text-lg font-semibold mb-4">Add a Task</h4>
       <form onSubmit={handleSubmitTaskForm} className="task-form">
@@ -85,7 +86,8 @@ const TaskManagementForm = ({ eventId, onTaskAdded }) => {
         {taskFormErrors.completed && <div className="text-red-500">{taskFormErrors.completed}</div>}
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add a Task</button>
       </form>
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 
