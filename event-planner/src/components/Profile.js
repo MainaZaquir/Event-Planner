@@ -40,7 +40,7 @@ function Profile({ user }) {
   }
   const handleDeleteUser = async () => {
     try {
-      const response = await axios.delete('http://127.0.0.1:5555/del_user', {
+      const response = await axios.delete('https://event-planner-app-backend.onrender.com/del_user', {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
