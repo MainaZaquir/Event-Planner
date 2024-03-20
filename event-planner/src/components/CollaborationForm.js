@@ -8,6 +8,8 @@ const CollaborationForm = ({ user }) => {
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [taskAssignments, setTaskAssignments] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [expense, setExpense] = useState([]);
+  const [taskassignment, setTaskAssignament] = useState([]);
   const [event, setEvent] = useState({});
   const [resource, setResource] = useState([]);
   const [showResourceForm, setShowResourceForm] = useState(false); // State to manage the visibility of the resource form
@@ -27,6 +29,12 @@ const CollaborationForm = ({ user }) => {
 
         const messagesResponse = await axios.get('http://127.0.0.1:5555/resource');
         setResource(messagesResponse.data);
+
+        const expenseResponse = await axios.get('http://127.0.0.1:5555/expenses');
+        setExpense(expenseResponse.data);
+
+        const tasAssignmentResponse = await axios.get('http://127.0.0.1:5555/task_management');
+        setTaskAssignament(tasAssignmentResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -34,7 +42,7 @@ const CollaborationForm = ({ user }) => {
 
     fetchData();
   }, [id]);
-
+console.log(expense)
   const handleClick = (id) => {
     fetch(`http://127.0.0.1:5555/events/${id}`, {
       headers: {
@@ -80,6 +88,17 @@ const handleUpdateTask = (id) =>{
       console.error('Error deleting resource:', error);
     }
   };
+  const handleDeleteExpense = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:5555/expense/${id}`);
+      const updatedExpense = expense.filter(task => task.id !== id);
+      setExpense(updatedExpense);
+      alert("Expense deleted successfuly")
+    } catch (error) {
+      console.error('Error deleting resource:', error);
+    }
+  };
+  
   
   useEffect(() => {
     const fetchData = async () => {
@@ -96,6 +115,7 @@ const handleUpdateTask = (id) =>{
   // console.log(taskAssignments)
   // console.log(resource)
   return (
+    <>
     <div className='parent'>
 {user.user_id === event['organizer_id'] ? (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -152,8 +172,10 @@ const handleUpdateTask = (id) =>{
 
     <div className="grid grid-cols-1 gap-4">
       {tasks.map(task => (
+        
         task.organizer_id === user.user_id && task.event_id === event.id ? (
           <div key={task.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+            
             <h3>Task</h3>
             <div className="p-4">
               <h3 className="text-lg font-bold text-blue-800 mb-1">{task.title}</h3>
@@ -164,6 +186,7 @@ const handleUpdateTask = (id) =>{
             </div>
            
           </div>
+          
         ) : (
           task.id === event.id ? (
             <div key={task.id} className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -206,7 +229,31 @@ const handleUpdateTask = (id) =>{
     </div>
   </div>
 )}
-</div>
+{expense.map(exp => (
+  exp.event_id === event.id ? (
+    <div key={exp.id} className="w-full md:w-1/2 lg:w-1/3 p-4">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="p-4">
+          <h4 className="text-lg font-bold text-blue-800 mb-1">Expense</h4>
+          <h3 className="text-lg font-bold text-blue-800 mb-1">{exp.description}</h3>
+          <p className="text-sm text-gray-600 mb-2">Amount: {exp.amount}</p>
+          {/* Render buttons based on organizer ID */}
+          {user.user_id === event.organizer_id && (
+            <>
+              {/* <button onClick={() => handleUpdateExpense(exp.id)}>Update</button> */}
+              <button onClick={() => handleDeleteExpense(exp.id)} className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Delete</button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  ) : null
+))}
+
+
+
+</div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</>
   );
 };
 

@@ -48,7 +48,7 @@ const EventManagementForm = () => {
     }
   
     try {
-      const response = await fetch('http://127.0.0.1:5555/events', {
+      const response = await fetch('https://event-planner-app-backend.onrender.com/events', {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -87,7 +87,7 @@ const EventManagementForm = () => {
     }
   
     try {
-      const response = await fetch('http://127.0.0.1:5555/events', {
+      const response = await fetch('https://event-planner-app-backend.onrender.com/events', {
         method: "POST",
         headers: {
           'Accept': 'application/json',

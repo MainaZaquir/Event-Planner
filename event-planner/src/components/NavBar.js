@@ -8,12 +8,14 @@ const NavLinks = ({ className, isLoggedIn, handleLogout }) => {
       <ul className={className}>
         <Link to='/dashboard'><li className='p-4 px-12 font-bold text-blue-500'>Dashboard</li></Link>
         <Link to='/events'><li className='p-4 px-12 font-bold text-blue-500'>Event</li></Link>
-        <Link to='/'><li className='p-4 px-12 font-bold text-blue-500'>About</li></Link>
+        
         
         <Link to='/task_assign'><li className='p-4 px-12 font-bold text-blue-500'>Assign Task</li></Link>
         <Link to='/budget'><li className='p-4 px-12 font-bold text-blue-500'>Budget</li></Link>
+        <Link to='/expenses'><li className='p-4 px-12 font-bold text-blue-500'>Expense</li></Link>
         <Link to='/user_stories'><li className='p-4 px-12 font-bold text-blue-500'>User Story</li></Link>
         <Link to='/users'><li className='p-4 px-12 font-bold text-blue-500'>My Profile</li></Link>
+        
         <li className='p-4 px-12 font-bold text-blue-500 cursor-pointer' onClick={handleLogout}>Logout</li>
       </ul>
     );
@@ -39,7 +41,7 @@ function Home() {
   const handleLogout = () => {
     localStorage.removeItem('jwt'); // Remove JWT token from local storage
     // You can also redirect the user to the login page or perform any other actions needed
-    navigate('login')
+    navigate('/login')
 
   };
 

@@ -15,7 +15,8 @@ function Footer() {
                             <ul>
                                 <li><a href="/dashboard" className="text-white hover:underline">Dashboard</a></li>
                                 <li><a href="/events" className="text-white hover:underline">Events</a></li>
-                                <li><a href="/Task Assignment" className="text-white hover:underline">Tasks Assignment</a></li>
+                                {/* <li><a href="/task_assignment" className="text-white hover:underline">Tasks Assignment</a></li> */}
+                                <li ><a href='/'className="text-white hover:underline">About</a></li>
                                 <li><a href="/user_stories" className="text-white hover:underline">User Story</a></li>
                             </ul>
                         </div>

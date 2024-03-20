@@ -180,7 +180,7 @@ const BudgetManagementForm = ({ budget,user }) => {
           </table>
         </div>
       </div>
-    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </>
   );
 };
