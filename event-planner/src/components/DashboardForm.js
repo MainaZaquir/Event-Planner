@@ -16,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsResponse = await axios.get('http://127.0.0.1:5555/events');
+        const eventsResponse = await axios.get('https://event-planner-app-backend.onrender.com/events');
         setEvents(eventsResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -26,17 +26,6 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  const handleTaskFilter = (category) => {
-    let filtered = [];
-    if (category === 'all') {
-      filtered = tasks;
-    } else if (category === 'completed') {
-      filtered = tasks.filter(task => task.status === 'completed');
-    } else if (category === 'pending') {
-      filtered = tasks.filter(task => task.status !== 'completed');
-    }
-    setFilteredTasks(filtered);
-  };
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -45,20 +34,7 @@ const Dashboard = () => {
     return result;
   };
 
-  const onDragEnd = (result) => {
-    if (!result.destination) {
-      return;
-    }
 
-    const items = reorder(
-      tasks,
-      result.source.index,
-      result.destination.index
-    );
-
-    setTasks(items);
-    setFilteredTasks(items);
-  };
 
   const handleTaskAdded = (newTask) => {
     setTasks(prevTasks => [...prevTasks, newTask]);

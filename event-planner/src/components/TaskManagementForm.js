@@ -42,7 +42,7 @@ const TaskManagementForm = ({ eventId, onTaskAdded }) => {
   const handleSubmitTaskForm = (e) => {
     e.preventDefault();
     if (validateTaskForm()) {
-      fetch('http://127.0.0.1:5555/task', {
+      fetch('https://event-planner-app-backend.onrender.com/task', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

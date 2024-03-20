@@ -18,7 +18,7 @@ const TaskAssignment = ({user}) => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5555/task'); 
+      const response = await axios.get('https://event-planner-app-backend.onrender.com/task'); 
       setTasks(response.data);
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -27,7 +27,7 @@ const TaskAssignment = ({user}) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5555/users'); 
+      const response = await axios.get('https://event-planner-app-backend.onrender.com/users'); 
       setUsers(response.data.map(user => ({ value: user.id, label: user.username })));
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -53,7 +53,7 @@ const TaskAssignment = ({user}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateTaskForm()){
-      fetch('http://127.0.0.1:5555/task_management', {
+      fetch('https://event-planner-app-backend.onrender.com/task_management', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

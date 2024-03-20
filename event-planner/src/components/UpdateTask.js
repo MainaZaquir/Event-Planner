@@ -42,7 +42,7 @@ const UpdateTask = ({ eventId}) => {
     e.preventDefault();
     if(true){
       try {
-        const response = await fetch(`http://127.0.0.1:5555/task_update/${id}`, {
+        const response = await fetch(`https://event-planner-app-backend.onrender.com/task_update/${id}`, {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',

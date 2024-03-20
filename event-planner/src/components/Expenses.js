@@ -19,7 +19,7 @@ const Expense = ({ user }) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:5555/expenses', expenseForm, {
+      const response = await axios.post('https://event-planner-app-backend.onrender.com/expenses', expenseForm, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         }
@@ -49,7 +49,7 @@ const Expense = ({ user }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsResponse = await axios.get('http://127.0.0.1:5555/events');
+        const eventsResponse = await axios.get('https://event-planner-app-backend.onrender.com/events');
         setEvents(eventsResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
