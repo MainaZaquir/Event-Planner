@@ -20,20 +20,20 @@ const CollaborationForm = ({ user }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsResponse = await axios.get(`http://127.0.0.1:5555/events/${id}`);
+        const eventsResponse = await axios.get(`https://event-planner-app-backend.onrender.com/events/${id}`);
         setEvent(eventsResponse.data);
 
-        const tasksResponse = await axios.get('http://127.0.0.1:5555/task');
+        const tasksResponse = await axios.get('https://event-planner-app-backend.onrender.com/task');
         setTasks(tasksResponse.data);
         setFilteredTasks(tasksResponse.data);
 
-        const messagesResponse = await axios.get('http://127.0.0.1:5555/resource');
+        const messagesResponse = await axios.get('https://event-planner-app-backend.onrender.com/resource');
         setResource(messagesResponse.data);
 
-        const expenseResponse = await axios.get('http://127.0.0.1:5555/expenses');
+        const expenseResponse = await axios.get('https://event-planner-app-backend.onrender.com/expenses');
         setExpense(expenseResponse.data);
 
-        const tasAssignmentResponse = await axios.get('http://127.0.0.1:5555/task_management');
+        const tasAssignmentResponse = await axios.get('https://event-planner-app-backend.onrender.com/task_management');
         setTaskAssignament(tasAssignmentResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -44,7 +44,7 @@ const CollaborationForm = ({ user }) => {
   }, [id]);
 console.log(expense)
   const handleClick = (id) => {
-    fetch(`http://127.0.0.1:5555/events/${id}`, {
+    fetch(`https://event-planner-app-backend.onrender.com/events/${id}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const handleUpdateTask = (id) =>{
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://127.0.0.1:5555/task_update/${taskId}`);
+      await axios.delete(`https://event-planner-app-backend.onrender.com/task_update/${taskId}`);
       const updatedTasks = tasks.filter(task => task.id !== taskId);
       setTasks(updatedTasks);
       alert("Task Update deleted successfuly")
@@ -80,7 +80,7 @@ const handleUpdateTask = (id) =>{
 
   const handleDeleteResource = async (taskId) => {
     try {
-      await axios.delete(`http://127.0.0.1:5555/resource/${taskId}`);
+      await axios.delete(`https://event-planner-app-backend.onrender.com/resource/${taskId}`);
       const updatedResource = resource.filter(task => task.id !== taskId);
       setResource(updatedResource);
       alert("Resource deleted successfuly")
@@ -90,7 +90,7 @@ const handleUpdateTask = (id) =>{
   };
   const handleDeleteExpense = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:5555/expense/${id}`);
+      await axios.delete(`https://event-planner-app-backend.onrender.com/expense/${id}`);
       const updatedExpense = expense.filter(task => task.id !== id);
       setExpense(updatedExpense);
       alert("Expense deleted successfuly")
@@ -103,7 +103,7 @@ const handleUpdateTask = (id) =>{
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5555/task_management'); // Assuming your API endpoint for fetching tasks is '/api/all_tasks'
+            const response = await axios.get('https://event-planner-app-backend.onrender.com/task_management'); // Assuming your API endpoint for fetching tasks is '/api/all_tasks'
             setTaskAssignments(response.data);
         } catch (error) {
             console.error('Error fetching task assignments:', error);
