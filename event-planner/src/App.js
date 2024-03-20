@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import {  Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import DashboardForm from './components/DashboardForm';
@@ -19,40 +19,47 @@ import TaskAssignment from './components/TaskAssignment';
 import UserStoryPage from './components/UserStoryPage';
 import Footer from './components/Footer'; 
 import Expense from './components/Expenses';
+
 import UpdateTask from './components/UpdateTask';
 
-import { useNavigate } from 'react-router-dom';
+
+
+
+import {useNavigate } from 'react-router-dom';
 
 function App() {
-    const [user, setUser] = useState({});
-    const navigate = useNavigate();
-
+    const [user , setUser]=useState({})
+    const navigate = useNavigate()
     useEffect(() => {
         const checkSession = () => {
             fetch("https://event-planner-app-backend.onrender.com/check_session", {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-                },
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+            } else {
+              // navigate("/login")
+            throw new Error('Failed to check session');
+            }
             })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Failed to check session');
-                }
-            })
-            .then(userData => {
-                setUser(userData);
-            })
-            .catch(error => {
-                console.error('Error checking session:', error);
-            });
+        .then(userData => {
+            console.log(userData);
+            // navigate(window.location.pathname); 
+            setUser(userData)
+        })
+        .catch(error => {
+            // console.error('Error checking session:', error);
+            
+        });
         };
-        checkSession();
-    }, []);
-
-    return (
+    checkSession();
+    
+}, [navigate]);
+        return (
         <div>
             <Navbar />
             <hr />
@@ -67,19 +74,20 @@ function App() {
                     <Route path="/resources" element={<ResourceManagement user={user} />} />
                     <Route path="/collaboration" element={<CollaborationForm />} />
                     <Route path="/budget" element={<BudgetManagementForm user={user} />} />
-                    <Route path="/event/:id" element={<CollaborationForm user={user} />} />
-                    <Route path="/update_event/:id" element={<UpdateEvent />} />
-                    <Route path="/update_task/:id" element={<UpdateTask />} />
-                    <Route path="/task_assign" element={<TaskAssignment user={user} />} />
-                    <Route path="/user_stories" element={<UserStoryPage user={user} />} />
+                    <Route path='/event/:id' element={<CollaborationForm user={user} />} />
+                    <Route path='/update_event/:id' element={<UpdateEvent />} />
+                    <Route path='/update_task/:id' element={<UpdateTask />} />
+                    <Route path='/task_assign' element={<TaskAssignment user={user} />} />
+                    <Route path='/user_stories' element={<UserStoryPage user={user} />} />
                     <Route path="/update_expense/:id" element={<ExpenseForm />} />
-                    <Route path="/expenses" element={<ExpenseForm user={user} />} />
-                    <Route path="/expenses" element={<Expense user={user} />} />
+                    <Route path='/expenses' element={<ExpenseForm user={user} />} />
+                    <Route path='/expenses/:id' element={<Expense user={user} />} />
                 </Routes>
             </main>
             <Footer />
         </div>
     );
+    
 }
 
 export default App;
