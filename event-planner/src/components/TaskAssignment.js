@@ -4,6 +4,7 @@ import axios from 'axios';
 const TaskAssignment = ({user}) => {
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
+  const [taskFormErrors, setTaskFormErrors] = useState({});
   const [assignedTask, setAssignedTask] = useState({
     task_id: '',
     user_id: '',
@@ -17,7 +18,7 @@ const TaskAssignment = ({user}) => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5555/task'); 
+      const response = await axios.get('https://event-planner-app-backend.onrender.com/task'); 
       setTasks(response.data);
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -26,7 +27,7 @@ const TaskAssignment = ({user}) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5555/users'); 
+      const response = await axios.get('https://event-planner-app-backend.onrender.com/users'); 
       setUsers(response.data.map(user => ({ value: user.id, label: user.username })));
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -37,36 +38,52 @@ const TaskAssignment = ({user}) => {
     const { name, value } = e.target;
     setAssignedTask((prev) => ({ ...prev, [name]: value }));
   };
-
+  const validateTaskForm = () => {
+    let errors = {};
+    if (!assignedTask.task_id) {
+      errors.task_id = 'A Task is required for the task assignment';
+    }
+    if (!assignedTask.user_id) {
+      errors.user_id = 'A user  is required for the task assignment';
+    }
+  
+    setTaskFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (validateTaskForm()){
+      fetch('https://event-planner-app-backend.onrender.com/task_management', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        },
+        body: JSON.stringify(assignedTask)
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          alert('Assigned Task successfuly')
+          return response.json();
   
-    fetch('http://127.0.0.1:5555/task_management', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      },
-      body: JSON.stringify(assignedTask)
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data.message);
-        fetchTasks(); 
-      })
-      .catch((error) => {
-        console.error('Error assigning task:', error);
-      });
+        })
+        .then((data) => {
+          console.log(data.message);
+          fetchTasks(); 
+        })
+        .catch((error) => {
+          console.error('Error assigning task:', error);
+        });
+    }
+
   };
   
 
   return (
+    <>
     <div className="container mx-auto p-4">
       <h3 className="text-2xl font-bold ">Task Assignment</h3>
       <form onSubmit={handleSubmit} className="mb-4">
@@ -127,7 +144,8 @@ const TaskAssignment = ({user}) => {
           </li>
         ))}
       </ul> */}
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 

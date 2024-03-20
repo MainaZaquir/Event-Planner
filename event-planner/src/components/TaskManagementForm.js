@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
-// import axios
-import { useParams,useNavigate } from 'react-router-dom';
-import './TaskManagementForm.css'; 
+import { useParams, useNavigate } from 'react-router-dom';
 
-const TaskManagementForm = ({ eventId,onTaskAdded }) => {
-  // const {id} = useParams()
+const TaskManagementForm = ({ eventId, onTaskAdded }) => {
   const [taskForm, setTaskForm] = useState({
-    title:'',
-    description: '',
+    title: '',
+    // description: '',
     deadline: '',
-    completed:"False",
-    event_id:eventId,
-    // organizer_id:0
-
+    completed: 'False',
+    event_id: eventId,
   });
+
   const [taskFormErrors, setTaskFormErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleTaskFormChange = (e) => {
     const { name, value } = e.target;
@@ -23,20 +20,20 @@ const TaskManagementForm = ({ eventId,onTaskAdded }) => {
       [name]: value
     }));
   };
-console.log(taskForm)
+
   const validateTaskForm = () => {
     let errors = {};
-    if (!taskForm.description.trim()) {
-      errors.description = 'A description is required for the task';
+    if (!taskForm.title.trim()) {
+      errors.title = 'A title is required for the task';
+    }
+    if (!taskForm.completed.trim()) {
+      errors.completed = 'A complete status is required for the task';
     }
     if (!taskForm.deadline) {
       errors.deadline = 'A deadline is required for the task';
     }
-    if (!taskForm.title.trim()) {
-      errors.priority = 'A title is required for the task';
-    }
     if (!taskForm.event_id) {
-      errors.priority = 'An event_id is required for the task';
+      errors.event_id = 'An event ID is required for the task';
     }
     setTaskFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -45,46 +42,52 @@ console.log(taskForm)
   const handleSubmitTaskForm = (e) => {
     e.preventDefault();
     if (validateTaskForm()) {
-      fetch('http://127.0.0.1:5555/task',{
+      fetch('https://event-planner-app-backend.onrender.com/task', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         },
         method: "POST",
-        body:JSON.stringify(taskForm)
+        body: JSON.stringify(taskForm)
       })
-        
-        .catch(error => console.error(error));
+      .then(response => {
+        if (response.ok) {
+          alert('Task added successfully');
+          navigate(`/event/${eventId}`);
+        } else {
+          alert('Failed to add task');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        alert('An error occurred while adding task');
+      });
     }
     setTaskForm({
-      title:'',
-      description: '',
+      title: '',
+      // description: '',
       deadline: '',
-      completed:"",
-      event_id:"",
-      
-  
-    })
+      completed: '',
+      event_id: eventId,
+    });
   };
 
   return (
-    <div className="task-management-container"> 
-      <h4>Add a Task</h4>
-      <form onSubmit={handleSubmitTaskForm} className="task-form"> 
-      <input type="text" name="title" value={taskForm.title} placeholder='title' onChange={handleTaskFormChange} />
-      <input type="date" name="deadline" value={taskForm.deadline}  onChange={handleTaskFormChange} />
-        {taskFormErrors.deadline && <div className="error">{taskFormErrors.deadline}</div>} 
-        <input type="text" name="description" value={taskForm.description} placeholder='description' onChange={handleTaskFormChange} />
-        {taskFormErrors.description && <div className="error">{taskFormErrors.description}</div>} 
-        <input type="text" name="completed" value={taskForm.completed} placeholder='True or false' onChange={handleTaskFormChange} />
-        {/* <input type="text" name="user_id" value={taskForm.user_id} placeholder='user_id' onChange={handleTaskFormChange} /> */}
-        {/* <input type="text" name="organizer_id" value={taskForm.organizer_id} placeholder='orgaizer_id' onChange={handleTaskFormChange} /> */}
-
-        {/* <input type="text" name="event_id" value={taskForm.event_id} placeholder='event_id' onChange={handleTaskFormChange} /> */}
-        <button type="submit">Add a Task</button>
+    <>
+    <div className="task-management-container">
+      <h4 className="text-lg font-semibold mb-4">Add a Task</h4>
+      <form onSubmit={handleSubmitTaskForm} className="task-form">
+        <input type="text" name="title" value={taskForm.title} placeholder="Title" onChange={handleTaskFormChange} className="mb-4 p-2 border border-gray-300 rounded" /><br />
+        {taskFormErrors.title && <div className="text-red-500">{taskFormErrors.title}</div>}
+        <input type="date" name="deadline" value={taskForm.deadline} placeholder="Deadline" onChange={handleTaskFormChange} className="mb-4 p-2 border border-gray-300 rounded" /><br />
+        {taskFormErrors.deadline && <div className="text-red-500">{taskFormErrors.deadline}</div>}
+        <input name="complete" value={taskForm.completed} placeholder="Completed True or False" onChange={handleTaskFormChange} className="mb-4 p-2 border border-gray-300 rounded" /><br />
+        {taskFormErrors.completed && <div className="text-red-500">{taskFormErrors.completed}</div>}
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add a Task</button>
       </form>
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 

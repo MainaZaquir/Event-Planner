@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {  Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import DashboardForm from './components/DashboardForm';
@@ -18,6 +18,15 @@ import UpdateEvent from './components/UpdateEvent';
 import TaskAssignment from './components/TaskAssignment';
 import UserStoryPage from './components/UserStory';
 import Footer from './components/Footer'; // import the Footer component
+import Expense from './components/Expenses';
+import UserStoryPage from './components/UserStoryPage'; 
+import Footer from './components/Footer'; 
+
+import UpdateTask from './components/UpdateTask';
+
+
+
+
 import {useNavigate } from 'react-router-dom';
 
 function App() {
@@ -25,7 +34,7 @@ function App() {
     const navigate = useNavigate()
     useEffect(() => {
         const checkSession = () => {
-          fetch("http://127.0.0.1:5555/check_session", {
+          fetch("https://event-planner-app-backend.onrender.com/check_session", {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -35,7 +44,9 @@ function App() {
             if (response.ok) {
               return response.json();
             } else {
+              // navigate("/login")
               throw new Error('Failed to check session');
+              
             }
           })
           .then(userData => {
@@ -45,12 +56,12 @@ function App() {
           })
           .catch(error => {
             // console.error('Error checking session:', error);
-            navigate("/login")
+            
           });
         };
     checkSession();
     
-      }, []);
+      }, [navigate]);
     return (
         <div>
         <Navbar />
@@ -68,13 +79,23 @@ function App() {
             <Route path="/budget" element={<BudgetManagementForm user={user} />} />
             <Route path='/event/:id' element={<CollaborationForm user={user} />}/>
             <Route path='/update_event/:id' element={<UpdateEvent />}/>
+            <Route path='/update_task/:id' element={<UpdateTask />}/>
             <Route path='/task_assign' element={<TaskAssignment user={user} />}/>
             <Route path='/user_stories' element={<UserStoryPage user={user} />}/>
+
             <Route path="/update_expense/:id" element={<ExpenseForm />} /> {/* new route */}
             <Route path='/expenses' element={<ExpenseForm user={user} />}/> 
         </Routes>
         </main>
         <Footer /> {/* use the Footer component */}
+
+            <Route path='/users' element={<Profile user={user} />}/>
+            <Route path='/expenses' element={<Expense user={user} />} />
+
+        </Routes>
+        </main>
+        <Footer />
+
         </div>
     );
 }

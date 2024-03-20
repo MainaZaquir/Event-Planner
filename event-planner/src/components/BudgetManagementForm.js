@@ -11,7 +11,7 @@ const BudgetManagementForm = ({ budget,user }) => {
   const [eventOptions, setEventOptions] = useState([]);
   const onSubmit = async (formData) => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/budgets', {
+      const response = await fetch('https://event-planner-app-backend.onrender.com/budgets', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -21,7 +21,7 @@ const BudgetManagementForm = ({ budget,user }) => {
         body: JSON.stringify(formData)
       });
       if (response.ok) {
-        console.log('Expense added successfully');
+        alert('Expense added successfully');
         // You may want to update the UI or refetch data after adding expense
       } else {
         const errorData = await response.json();
@@ -54,7 +54,7 @@ const BudgetManagementForm = ({ budget,user }) => {
 
   const fetchBudgetData = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/budgets', {
+      const response = await fetch('https://event-planner-app-backend.onrender.com/budgets', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const BudgetManagementForm = ({ budget,user }) => {
 
   const fetchEventOptions = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/events', {
+      const response = await fetch('https://event-planner-app-backend.onrender.com/events', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const BudgetManagementForm = ({ budget,user }) => {
 
   const handleDeleteExpense = async (id) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5555/budget/${id}`, {
+      const response = await fetch(`https://event-planner-app-backend.onrender.com/budget/${id}`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ const BudgetManagementForm = ({ budget,user }) => {
   };
 
   return (
-    <div className="budget-management-container"><br /> <br /> <br /> <br />
+    <>    <div className="budget-management-container"><br /> <br /> <br /> <br />
       <h4>Budget Management and Expense Tracking</h4>
       <h5 className="card-title">Add an Budget</h5>
       <div>
@@ -180,7 +180,8 @@ const BudgetManagementForm = ({ budget,user }) => {
           </table>
         </div>
       </div>
-    </div>
+    </div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </>
   );
 };
 
