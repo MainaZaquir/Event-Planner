@@ -133,8 +133,8 @@ const BudgetManagementForm = ({ budget,user }) => {
 
   return (
     <>    <div className="budget-management-container"><br /> <br /> <br /> <br />
-      <h4>Budget Management and Expense Tracking</h4>
-      <h5 className="card-title">Add an Budget</h5>
+      <h4 className='text-white'>Budget Management and Expense Tracking</h4>
+      <h5 className="card-title text-white">Add an Budget</h5>
       <div>
         <form onSubmit={handleSubmitExpenseForm}>
           <select
