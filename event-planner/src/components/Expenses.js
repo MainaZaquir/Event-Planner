@@ -13,7 +13,7 @@ const Expense = ({ user }) => {
   const navigate =useNavigate()
 
   const [events, setEvents] = useState([]);
-  console.log(expenseForm);
+  // console.log(expenseForm);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
