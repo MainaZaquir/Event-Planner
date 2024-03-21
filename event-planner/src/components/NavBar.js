@@ -23,7 +23,7 @@ const NavLinks = ({ className, isLoggedIn, handleLogout }) => {
     return (
       <ul className={className}>
         <Link to='/login'><li className='p-4 px-12 font-bold text-blue-500'>Login</li></Link>
-        <a href='/register'><li className='p-4 px-12 font-bold text-blue-500'>Sign Up</li></a>
+        <Link to='/register'><li className='p-4 px-12 font-bold text-blue-500'>Sign Up</li></Link>
       </ul>
     );
   }
