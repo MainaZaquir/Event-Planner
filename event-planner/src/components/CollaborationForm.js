@@ -36,25 +36,48 @@ const CollaborationForm = ({ user }) => {
         const tasAssignmentResponse = await axios.get('https://event-planner-app-backend.onrender.com/task_management');
         setTaskAssignament(tasAssignmentResponse.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        // console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
   }, [id]);
 // console.log(expense)
-  const handleClick = (id) => {
-    fetch(`https://event-planner-app-backend.onrender.com/events/${id}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      },
-      method: "DELETE",
-    })
-      .then(() => navigate('/dashboard'))
-      .catch(error => console.error('Error:', error));
-  };
+
+
+const handleDeleteEvent = (id) => {
+  axios.delete(`https://event-planner-app-backend.onrender.com/events/${id}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    }
+  })
+  .then(response => {
+    // Check if the response is okay
+    if (response.status === 200 || response.status === 204) {
+      // It's okay to navigate
+      navigate('/dashboard');
+    } else {
+      // Handle other status codes if needed
+      console.error('Unexpected status code:', response.status);
+    }
+  })
+  .catch(error => {
+    // Check if it's a network error
+    if (error.response) {
+      // Server responded with a status code outside the range of 2xx
+      console.error('Server responded with:', error.response.data);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error('No response received:', error.request);
+    } else {
+      // Something happened in setting up the request that triggered an error
+      console.error('Error setting up the request:', error.message);
+    }
+  });
+};
+
 
   const handleUpdate = (id) => {
     navigate(`/update_event/${id}`);
@@ -128,7 +151,7 @@ const handleUpdateTask = (id) =>{
       </div>
       <div>
         <button onClick={() => handleUpdate(event.id)}>Update</button><br />
-        <button onClick={() => handleClick(event.id)}>Delete</button>
+        <button onClick={() => handleDeleteEvent(event.id)}>Delete</button>
       </div>
     </div>
 

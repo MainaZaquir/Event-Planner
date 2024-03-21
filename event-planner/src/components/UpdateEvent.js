@@ -49,7 +49,7 @@ const UpdateEvent = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+    <div className="min-h-screen flex justify-center items-center">
       <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold mb-6 text-center">Update Event</h1>
         <form onSubmit={handleSubmitEventForm}>

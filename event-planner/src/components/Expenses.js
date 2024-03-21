@@ -62,13 +62,13 @@ const Expense = ({ user }) => {
   return (
     <>
     <div className="container">
-      <h2>Add New Expense</h2>
+      <h2 className='btn-primary'>Add New Expense</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="expenseName">Expense Name</label>
+          <label className='text-white' htmlFor="expenseName">Expense Name</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control "
             id="expenseName"
             value={expenseForm.description}
             onChange={(e) => setExpenseForm({ ...expenseForm, description: e.target.value })}
@@ -76,7 +76,7 @@ const Expense = ({ user }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="expenseAmount">Amount</label>
+          <label className='text-white' htmlFor="expenseAmount">Amount</label>
           <input
             type="number"
             className="form-control"
