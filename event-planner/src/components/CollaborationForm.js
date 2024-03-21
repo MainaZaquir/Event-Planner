@@ -5,11 +5,11 @@ import ResourceManagementForm from './ResourceManagement';
 import TaskManagementForm from './TaskManagementForm';
 
 const CollaborationForm = ({ user }) => {
-  const [filteredTasks, setFilteredTasks] = useState([]);
-  const [taskAssignments, setTaskAssignments] = useState([]);
+  // const [filteredTasks, setFilteredTasks] = useState([]);
+  const [ setTaskAssignments] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [expense, setExpense] = useState([]);
-  const [taskassignment, setTaskAssignament] = useState([]);
+  // const [taskassignment, setTaskAssignament] = useState([]);
   const [event, setEvent] = useState({});
   const [resource, setResource] = useState([]);
   const [showResourceForm, setShowResourceForm] = useState(false); // State to manage the visibility of the resource form
@@ -25,7 +25,7 @@ const CollaborationForm = ({ user }) => {
 
         const tasksResponse = await axios.get('https://event-planner-app-backend.onrender.com/task');
         setTasks(tasksResponse.data);
-        setFilteredTasks(tasksResponse.data);
+        // setFilteredTasks(tasksResponse.data);
 
         const messagesResponse = await axios.get('https://event-planner-app-backend.onrender.com/resource');
         setResource(messagesResponse.data);
@@ -33,8 +33,8 @@ const CollaborationForm = ({ user }) => {
         const expenseResponse = await axios.get('https://event-planner-app-backend.onrender.com/expenses');
         setExpense(expenseResponse.data);
 
-        const tasAssignmentResponse = await axios.get('https://event-planner-app-backend.onrender.com/task_management');
-        setTaskAssignament(tasAssignmentResponse.data);
+        // const tasAssignmentResponse = await axios.get('https://event-planner-app-backend.onrender.com/task_management');
+        // setTaskAssignament(tasAssignmentResponse.data);
       } catch (error) {
         // console.error('Error fetching data:', error);
       }
@@ -55,6 +55,7 @@ const handleDeleteEvent = (id) => {
   })
   .then(response => {
     // Check if the response is okay
+    
     if (response.status === 200 || response.status === 204) {
       // It's okay to navigate
       navigate('/dashboard');
@@ -87,7 +88,7 @@ const handleUpdateTask = (id) =>{
 }
   const handleTaskAdded = (newTask) => {
     setTasks(prevTasks => [...prevTasks, newTask]);
-    setFilteredTasks(prevTasks => [...prevTasks, newTask]);
+    // setFilteredTasks(prevTasks => [...prevTasks, newTask]);
   };
 
   const handleDeleteTask = async (taskId) => {
@@ -134,7 +135,7 @@ const handleUpdateTask = (id) =>{
     };
 
     fetchData();
-}, []);
+});
   // console.log(taskAssignments)
   // console.log(resource)
   return (

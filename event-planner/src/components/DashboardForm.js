@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import ResourceManagementForm from './ResourceManagement'; 
-import TaskManagementForm from './TaskManagementForm';
-import { useParams, useNavigate } from 'react-router-dom';
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+// import ResourceManagementForm from './ResourceManagement'; 
+// import TaskManagementForm from './TaskManagementForm';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
-  const [tasks, setTasks] = useState([]);
-  const [filteredTasks, setFilteredTasks] = useState([]);
-  const [messages] = useState([]);
-  let { userId } = useParams();
+  // const [tasks, setTasks] = useState([]);
+  // const [filteredTasks, setFilteredTasks] = useState([]);
+  // const [messages] = useState([]);
+  // let { userId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,19 +27,19 @@ const Dashboard = () => {
   }, []);
 
 
-  const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-  };
+  // const reorder = (list, startIndex, endIndex) => {
+  //   const result = Array.from(list);
+  //   const [removed] = result.splice(startIndex, 1);
+  //   result.splice(endIndex, 0, removed);
+  //   return result;
+  // };
 
 
 
-  const handleTaskAdded = (newTask) => {
-    setTasks(prevTasks => [...prevTasks, newTask]);
-    setFilteredTasks(prevTasks => [...prevTasks, newTask]);
-  };
+  // const handleTaskAdded = (newTask) => {
+  //   setTasks(prevTasks => [...prevTasks, newTask]);
+  //   setFilteredTasks(prevTasks => [...prevTasks, newTask]);
+  // };
 
   const handleClick = (id) => {
     navigate(`/event/${id}`);
