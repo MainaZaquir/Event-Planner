@@ -93,7 +93,7 @@ const BudgetManagementForm = ({ budget,user }) => {
       console.error('Error fetching event options:', error.message);
     }
   };
-  console.log(eventOptions)
+  // console.log(eventOptions)
   const handleSubmitExpenseForm = (e) => {
     e.preventDefault();
     const errors = validateExpenseForm();
@@ -120,7 +120,7 @@ const BudgetManagementForm = ({ budget,user }) => {
         method: "DELETE"
       });
       if (response.ok) {
-        console.log('Expense deleted successfully');
+        alert('Expense deleted successfully');
         // You may want to update the UI or refetch data after deleting expense
       } else {
         const errorData = await response.json();
@@ -144,9 +144,9 @@ const BudgetManagementForm = ({ budget,user }) => {
             className="form-select"
           >
             <option value="">Select Event</option>
-            {eventOptions.map(option => (
-              // remember to correct here option.event_id === user.user_id 
-             true?<option key={option.value} value={option.value}>{option.label}</option>:null
+            {eventOptions.map(event => (
+              // remember to correct here 
+              true?<option key={event.value} value={event.value}>{event.label}</option>:null
             ))}
           </select>
           {expenseFormErrors.event_id && <div className="error-message">{expenseFormErrors.event_id}</div>}
@@ -169,13 +169,14 @@ const BudgetManagementForm = ({ budget,user }) => {
             </thead>
             <tbody>
               {budgetData.map((expense, index) => (
+                user.user_id === expense.organizer_id ?
                 <tr key={index}>
                   <td>{expense.id}</td>
                   <td>{expense.event_id}</td>
                   <td>{expense.total}</td>
-                  <td><button onClick={() => handleDeleteExpense(expense.id)} className="btn btn-danger">Delete</button></td>
+                <td><button onClick={() => handleDeleteExpense(expense.id)} className="btn btn-danger">Delete</button></td>
                 </tr>
-              ))}
+             :null ))}
             </tbody>
           </table>
         </div>
