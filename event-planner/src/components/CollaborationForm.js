@@ -42,7 +42,7 @@ const CollaborationForm = ({ user }) => {
 
     fetchData();
   }, [id]);
-console.log(expense)
+// console.log(expense)
   const handleClick = (id) => {
     fetch(`https://event-planner-app-backend.onrender.com/events/${id}`, {
       headers: {
