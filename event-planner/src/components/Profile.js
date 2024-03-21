@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import {  useNavigate } from 'react-router-dom';
 
 function Profile({ user }) {
   const [users, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate =useNavigate()
+  // const navigate =useNavigate()
   useEffect(() => {
     fetch('https://event-planner-app-backend.onrender.com/users')
       .then(response => {
@@ -38,27 +38,27 @@ function Profile({ user }) {
   if (!user) {
     return <div>No user data available</div>;
   }
-  const handleDeleteUser = async () => {
-    try {
-      const response = await axios.delete('https://event-planner-app-backend.onrender.com/del_user', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-        }
-      });
+  // const handleDeleteUser = async () => {
+  //   try {
+  //     const response = await axios.delete('https://event-planner-app-backend.onrender.com/del_user', {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json',
+  //         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+  //       }
+  //     });
   
-      if (response.status === 200) {
-        alert('User deleted successfully');
-        localStorage.removeItem('jwt'); // Remove JWT token on successful deletion
-        navigate('/register'); // Redirect to register page
-      } else {
-        alert('Failed to delete user');
-      }
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  };
+  //     if (response.status === 200) {
+  //       alert('User deleted successfully');
+  //       localStorage.removeItem('jwt'); // Remove JWT token on successful deletion
+  //       navigate('/register'); // Redirect to register page
+  //     } else {
+  //       alert('Failed to delete user');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error deleting user:', error);
+  //   }
+  // };
   return (
     <>
     <div className="flex justify-center">

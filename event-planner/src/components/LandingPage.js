@@ -1,5 +1,4 @@
 import './LandingPage.css';
-import UserStoryPage from './UserStory';
 
 function LandingPage() {
     return (

@@ -4,7 +4,7 @@ import axios from 'axios';
 const TaskAssignment = ({user}) => {
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
-  const [taskFormErrors, setTaskFormErrors] = useState({});
+  // const [taskFormErrors, setTaskFormErrors] = useState({});
   const [assignedTask, setAssignedTask] = useState({
     task_id: '',
     user_id: '',
@@ -47,7 +47,7 @@ const TaskAssignment = ({user}) => {
       errors.user_id = 'A user  is required for the task assignment';
     }
   
-    setTaskFormErrors(errors);
+    // setTaskFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
   const handleSubmit = (e) => {

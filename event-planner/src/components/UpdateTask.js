@@ -10,7 +10,7 @@ const UpdateTask = ({ eventId}) => {
     event_id: eventId,
   });
 
-  const [taskFormErrors, setTaskFormErrors] = useState({});
+  // const [taskFormErrors, setTaskFormErrors] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
   const handleTaskFormChange = (e) => {
@@ -21,21 +21,21 @@ const UpdateTask = ({ eventId}) => {
     }));
   };
 
-  const validateTaskForm = () => {
-    let errors = {};
-    if (!taskForm.title) {
-      errors.title = 'A title is required for the task';
-    }
+  // const validateTaskForm = () => {
+  //   let errors = {};
+  //   if (!taskForm.title) {
+  //     errors.title = 'A title is required for the task';
+  //   }
   
-    if (!taskForm.deadline) {
-      errors.deadline = 'A deadline is required for the task';
-    }
-    if (!taskForm.event_id) {
-      errors.event_id = 'An event ID is required for the task';
-    }
-    setTaskFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
+  //   if (!taskForm.deadline) {
+  //     errors.deadline = 'A deadline is required for the task';
+  //   }
+  //   if (!taskForm.event_id) {
+  //     errors.event_id = 'An event ID is required for the task';
+  //   }
+  //   setTaskFormErrors(errors);
+  //   return Object.keys(errors).length === 0;
+  // };
   
 
   const handleSubmitTaskForm = async (e) => {
@@ -79,7 +79,7 @@ const UpdateTask = ({ eventId}) => {
             onChange={handleTaskFormChange}
             className="mb-4 p-2 border border-gray-300 rounded w-full"
           /><br />
-          {taskFormErrors.title && <div className="text-red-500">{taskFormErrors.title}</div>}
+          {/* {taskFormErrors.title && <div className="text-red-500">{taskFormErrors.title}</div>} */}
           <input
             type="date"
             name="deadline"
@@ -88,7 +88,7 @@ const UpdateTask = ({ eventId}) => {
             onChange={handleTaskFormChange}
             className="mb-4 p-2 border border-gray-300 rounded w-full"
           /><br />
-          {taskFormErrors.deadline && <div className="text-red-500">{taskFormErrors.deadline}</div>}
+          {/* {taskFormErrors.deadline && <div className="text-red-500">{taskFormErrors.deadline}</div>} */}
          
           <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full">Update a Task</button>
         </form>
