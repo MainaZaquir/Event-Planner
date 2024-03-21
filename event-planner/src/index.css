@@ -5,7 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: aqua;
+  /* background-color: aqua; */
+  /* Add background image */
+  background-image: url('background.jpg'); /* Replace 'path_to_your_image.jpg' with the path to your image file */
+  background-size: cover; /* Cover the entire background */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-position: center; /* Center the image */
 }
 
 code {
