@@ -85,10 +85,10 @@ const TaskAssignment = ({user}) => {
   return (
     <>
     <div className="container mx-auto p-4">
-      <h3 className="text-2xl font-bold ">Task Assignment</h3>
+      <h3 className="text-2xl font-bold text-white ">Task Assignment</h3>
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="flex flex-col mb-4">
-          <label htmlFor="task_id" className="mb-1">Task ID:</label>
+          <label htmlFor="task_id" className="mb-1 text-white">Task ID:</label>
           <select
             id="task_id"
             name="task_id"
@@ -103,7 +103,7 @@ const TaskAssignment = ({user}) => {
           </select>
         </div>
         <div className="flex flex-col mb-4">
-          <label htmlFor="user_id" className="mb-1">User ID:</label>
+          <label htmlFor="user_id" className="mb-1 text-white">User ID:</label>
           <select
             id="user_id"
             name="user_id"
@@ -129,9 +129,9 @@ const TaskAssignment = ({user}) => {
                 completed: e.target.checked
               }))
             }
-            className="mr-2"
+            className="mr-2 text-white"
           />
-          <label htmlFor="completed" className="mb-1">Completed</label>
+          <label htmlFor="completed" className="mb-1 text-white">Completed</label>
         </div>
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Assign Task</button>
       </form>
