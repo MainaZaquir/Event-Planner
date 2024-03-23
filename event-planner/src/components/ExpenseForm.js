@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
 
 function ExpenseForm({ initialExpense, onSubmit, onDelete }) {
-  const [expense, setExpense] = useState(initialExpense);
+  const [expense, setExpense] = useState(initialExpense || { name: '', amount: '', date: '' });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
+    const { name, value } = event.target;
     setExpense({
       ...expense,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!expense.name || !expense.amount || !expense.date) {
+      setErrors({
+        ...errors,
+        form: 'All fields are required.',
+      });
+      return;
+    }
+    setErrors({});
     onSubmit(expense);
   };
 
-  const handleDelete = (event) => {
-    event.preventDefault();
+  const handleDelete = () => {
     onDelete(expense);
   };
 
@@ -49,6 +58,7 @@ function ExpenseForm({ initialExpense, onSubmit, onDelete }) {
           onChange={handleChange}
         />
       </label>
+      {errors.form && <p style={{ color: 'red' }}>{errors.form}</p>}
       <button type="submit">Update Expense</button>
       <button type="button" onClick={handleDelete}>Delete Expense</button>
     </form>
